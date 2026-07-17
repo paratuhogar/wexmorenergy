@@ -11,8 +11,12 @@
 
     <!-- Header / Logo -->
     <header class="container mx-auto px-6 py-6 flex justify-center md:justify-start">
-        <!-- Aquí se cargará el logo de Luis -->
-        <img src="logo.png" alt="Wexmor Energy Logo" class="h-16 w-auto object-contain">
+        <!-- Imagen de respaldo si no hay logo.png -->
+        <div class="h-16 w-auto flex items-center justify-center">
+             <span class="text-2xl font-bold text-white">Wexmor <span class="text-emerald-400">Energy</span></span>
+        </div>
+        <!-- Descomenta esta línea y elimina el bloque div de arriba cuando tengas logo.png -->
+        <!-- <img src="logo.png" alt="Wexmor Energy Logo" class="h-16 w-auto object-contain"> -->
     </header>
 
     <!-- Contenido Principal -->
@@ -27,12 +31,12 @@
             Estamos diseñando una plataforma dedicada a soluciones de energía renovable para tu hogar. Muy pronto estaremos listos para ayudarte a transformar tu consumo de energía.
         </p>
 
-        <!-- Botón de Contacto / WhatsApp -->
+        <!-- Botones de Contacto -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="mailto:sales@wexmorenergy.com" class="px-8 py-3 bg-teal-500 hover:bg-teal-600 text-slate-900 font-bold rounded-lg transition-all shadow-lg shadow-teal-500/20">
                 Escríbenos al Correo
             </a>
-            <!-- Reemplaza el número 123456789 con el WhatsApp real de Luis -->
+            <!-- Reemplaza el número con el WhatsApp real de Luis si es diferente -->
             <a href="https://wa.me/34669486005" target="_blank" class="px-8 py-3 bg-transparent border border-gray-600 hover:border-gray-400 text-white font-medium rounded-lg transition-all">
                 Contactar por WhatsApp
             </a>
