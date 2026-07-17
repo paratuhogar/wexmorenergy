@@ -46,14 +46,13 @@
             border-color: rgba(234, 179, 8, 0.25);
         }
         
-        /* Efecto de resplandor para siluetear el PNG transparente y hacer legibles las letras negras */
-        .logo-contrast-glow {
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.85)) 
-                    drop-shadow(0 0 2px rgba(255, 255, 255, 0.9));
-        }
-        /* Aura de luz radial de fondo para dar profundidad */
-        .radial-aura {
-            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+        /* 
+           Filtro CSS avanzado:
+           Inbierte el negro (#000000) a blanco (#ffffff) sin distorsionar el naranja original 
+           de la palabra "energy" gracias a la rotación de matiz (hue-rotate) de 180 grados.
+        */
+        .logo-white-text {
+            filter: invert(1) hue-rotate(180deg);
         }
     </style>
 </head>
@@ -65,9 +64,9 @@
     <!-- Header -->
     <header class="sticky top-0 z-50 w-full glass-card border-b border-slate-900 px-6 py-4">
         <div class="container mx-auto flex items-center justify-between">
-            <!-- Logo pequeño en cabecera con leve filtro de contraste -->
+            <!-- Logo pequeño en cabecera con el filtro de texto blanco -->
             <div class="flex items-center">
-                <img src="logo.png" alt="Wexmor Energy" class="h-8 w-auto object-contain logo-contrast-glow">
+                <img src="logo.png" alt="Wexmor Energy" class="h-8 w-auto object-contain logo-white-text">
             </div>
             <div>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
@@ -81,7 +80,7 @@
     <!-- Contenedor Principal -->
     <main class="container mx-auto px-6 py-12 space-y-24 relative z-10">
 
-        <!-- Hero Section con Logo Grande Transparente -->
+        <!-- Hero Section con Logo Grande sin fondos ni auras -->
         <section class="flex flex-col items-center text-center min-h-[80vh] justify-center space-y-8 max-w-5xl mx-auto pt-6">
             
             <div class="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold tracking-wider text-emerald-400 uppercase bg-emerald-400/10 rounded-full border border-emerald-500/20">
@@ -89,13 +88,13 @@
                 Canal de Distribución Autorizado
             </div>
 
-            <!-- CONTENEDOR DEL LOGO GRANDE Y TRANSPARENTE -->
+            <!-- CONTENEDOR DEL LOGO GRANDE Y TOTALMENTE INTEGRADO -->
             <div class="relative w-full max-w-2xl mx-auto flex items-center justify-center py-4">
-                <!-- Aura de luz suave de fondo para separar el logo del negro puro -->
-                <div class="absolute w-[140%] h-[140%] radial-aura blur-3xl pointer-events-none -z-10"></div>
-                
-                <!-- Logo de gran escala con filtros para resaltar la tipografía oscura -->
-                <img src="logo.png" alt="Wexmor Energy" class="h-40 md:h-56 w-auto object-contain logo-contrast-glow transform hover:scale-[1.02] transition-transform duration-500 ease-out">
+                <!-- 
+                     Logo en gran escala: Se eliminó la nube blanca de fondo.
+                     Se aplica la clase .logo-white-text para cambiar el color negro a blanco directamente por código.
+                -->
+                <img src="logo.png" alt="Wexmor Energy" class="h-44 md:h-64 w-auto object-contain logo-white-text transform hover:scale-[1.02] transition-transform duration-500 ease-out">
             </div>
             
             <!-- Propuesta de Valor Principal -->
@@ -224,9 +223,9 @@
     <!-- Footer -->
     <footer class="border-t border-slate-900 bg-slate-950/90 relative z-10">
         <div class="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-            <!-- Footer Logo transparente con filtro de contraste -->
+            <!-- Logo en el pie de página con texto blanco aplicado -->
             <div class="flex items-center">
-                <img src="logo.png" alt="Wexmor Energy" class="h-8 w-auto object-contain logo-contrast-glow">
+                <img src="logo.png" alt="Wexmor Energy" class="h-8 w-auto object-contain logo-white-text">
             </div>
             <p class="text-gray-500 text-sm">
                 &copy; 2026 Wexmor Energy. Todos los derechos reservados.
