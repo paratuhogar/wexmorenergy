@@ -37,9 +37,15 @@
     ::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
 
     .hero-bg{
-        background-image:linear-gradient(105deg, rgba(10,13,16,0.97) 0%, rgba(10,13,16,0.88) 32%, rgba(10,13,16,0.35) 62%, rgba(10,13,16,0.15) 100%), url('hero.png');
+        background-image:linear-gradient(rgba(9,12,15,0.94), rgba(9,12,15,0.94)), url('hero.png');
         background-size:cover;
-        background-position:62% center;
+        background-position:70% center;
+    }
+    @media (min-width:768px){
+        .hero-bg{
+            background-image:linear-gradient(105deg, rgba(10,13,16,0.97) 0%, rgba(10,13,16,0.88) 32%, rgba(10,13,16,0.35) 62%, rgba(10,13,16,0.15) 100%), url('hero.png');
+            background-position:62% center;
+        }
     }
     @media (min-width:1024px){
         .hero-bg{
@@ -47,41 +53,6 @@
             background-position:68% center;
         }
     }
-
-    /* Manifest / route divider -------------------------------------------------- */
-    .manifest-line{
-        border-top:1px dashed var(--line);
-        position:relative;
-    }
-    .manifest-node{
-        position:relative;
-    }
-    .manifest-node::before{
-        content:'';
-        position:absolute;
-        left:50%;
-        top:-6px;
-        transform:translateX(-50%);
-        width:9px;
-        height:9px;
-        border-radius:50%;
-        background:var(--ink);
-        border:1.5px solid var(--orange);
-    }
-
-    input[type="range"]{accent-color:var(--orange);}
-    input[type="range"]::-webkit-slider-thumb{
-        -webkit-appearance:none;
-        appearance:none;
-        width:16px;
-        height:16px;
-        border-radius:50%;
-        background:var(--cream);
-        border:2px solid var(--orange);
-        cursor:pointer;
-        transition:transform .15s ease;
-    }
-    input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15);}
 
     @keyframes riseIn{
         from{opacity:0; transform:translateY(14px);}
@@ -202,38 +173,6 @@
             </div>
         </section>
 
-        <!-- MANIFIESTO DE RUTA (elemento distintivo) -->
-        <section class="border-y" style="border-color:var(--line); background:#0d1013;">
-            <div class="container mx-auto max-w-6xl px-6 py-7">
-                <div class="grid grid-cols-3 sm:grid-cols-6 gap-y-6 gap-x-3 border-t border-dashed pt-5" style="border-color:var(--line);">
-                    <div class="manifest-node text-center">
-                        <div class="font-mono text-[11px] tracking-widest" style="color:var(--orange);">SJO</div>
-                        <div class="font-mono text-[10px]" style="color:var(--muted);">San José</div>
-                    </div>
-                    <div class="manifest-node text-center">
-                        <div class="font-mono text-[11px] tracking-widest" style="color:var(--orange);">SAL</div>
-                        <div class="font-mono text-[10px]" style="color:var(--muted);">San Salvador</div>
-                    </div>
-                    <div class="manifest-node text-center">
-                        <div class="font-mono text-[11px] tracking-widest" style="color:var(--orange);">PTY</div>
-                        <div class="font-mono text-[10px]" style="color:var(--muted);">Panamá</div>
-                    </div>
-                    <div class="manifest-node text-center">
-                        <div class="font-mono text-[11px] tracking-widest" style="color:var(--orange);">SDQ</div>
-                        <div class="font-mono text-[10px]" style="color:var(--muted);">Santo Domingo</div>
-                    </div>
-                    <div class="manifest-node text-center">
-                        <div class="font-mono text-[11px] tracking-widest" style="color:var(--orange);">SJU</div>
-                        <div class="font-mono text-[10px]" style="color:var(--muted);">San Juan</div>
-                    </div>
-                    <div class="manifest-node text-center">
-                        <div class="font-mono text-[11px] tracking-widest" style="color:var(--orange);">KIN</div>
-                        <div class="font-mono text-[10px]" style="color:var(--muted);">Kingston</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <div class="container mx-auto max-w-6xl px-6 py-20 md:py-24 space-y-20">
 
             <!-- CAPACIDADES -->
@@ -283,44 +222,6 @@
                 </div>
             </section>
 
-            <!-- CALCULADORA -->
-            <section class="spec-card p-8 md:p-11">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <div class="lg:col-span-5 space-y-3.5">
-                        <i data-lucide="calculator" class="w-5 h-5" style="color:var(--orange);"></i>
-                        <h3 class="font-display text-2xl md:text-3xl font-bold tracking-tight" style="color:var(--cream);">Cálculo de viabilidad</h3>
-                        <p class="text-sm leading-relaxed" style="color:var(--muted);">
-                            Desliza para introducir el consumo eléctrico mensual y estimar el dimensionamiento, número de paneles y espacio requerido.
-                        </p>
-                    </div>
-
-                    <div class="lg:col-span-7 p-7 rounded-lg border space-y-7" style="background:#0d1013; border-color:var(--line);">
-                        <div>
-                            <div class="flex justify-between text-sm mb-3">
-                                <span class="font-medium" style="color:var(--muted);">Consumo mensual estimado</span>
-                                <span class="font-mono font-medium text-lg" style="color:var(--cream);" id="consumption-display">1,200 kWh</span>
-                            </div>
-                            <input type="range" id="consumption-input" min="200" max="10000" step="200" value="1200" class="w-full h-1 rounded-lg appearance-none cursor-pointer focus-ring" style="background:var(--line);">
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t" style="border-color:var(--line);">
-                            <div>
-                                <span class="text-[10px] block font-mono uppercase tracking-widest mb-1" style="color:var(--muted);">Módulos (550W)</span>
-                                <span class="font-mono text-2xl font-medium" style="color:var(--cream);" id="panel-display">16</span>
-                            </div>
-                            <div>
-                                <span class="text-[10px] block font-mono uppercase tracking-widest mb-1" style="color:var(--muted);">Área de cubierta</span>
-                                <span class="font-mono text-2xl font-medium" style="color:var(--cream);" id="area-display">42 m²</span>
-                            </div>
-                            <div>
-                                <span class="text-[10px] block font-mono uppercase tracking-widest mb-1" style="color:var(--muted);">Potencia inversor</span>
-                                <span class="font-mono text-2xl font-medium" style="color:var(--cream);" id="power-display">8.8 kW</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
         </div>
     </main>
 
@@ -339,33 +240,6 @@
 
     <script>
         lucide.createIcons();
-
-        (function initCalc() {
-            const consumptionInput = document.getElementById('consumption-input');
-            const consumptionDisplay = document.getElementById('consumption-display');
-            const panelDisplay = document.getElementById('panel-display');
-            const areaDisplay = document.getElementById('area-display');
-            const powerDisplay = document.getElementById('power-display');
-
-            if (!consumptionInput) return;
-
-            function update() {
-                const kwh = parseInt(consumptionInput.value);
-                consumptionDisplay.textContent = `${kwh.toLocaleString('es-ES')} kWh`;
-
-                const wattsReq = (kwh / 30) / 4.5 * 1000;
-                const numPanels = Math.ceil(wattsReq / 550);
-                const area = Math.ceil(numPanels * 2.6);
-                const sysPower = ((numPanels * 550) / 1000).toFixed(1);
-
-                panelDisplay.textContent = `${numPanels}`;
-                areaDisplay.textContent = `${area} m²`;
-                powerDisplay.textContent = `${sysPower} kW`;
-            }
-
-            consumptionInput.addEventListener('input', update);
-            update();
-        })();
     </script>
 </body>
 </html>
