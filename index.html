@@ -28,6 +28,7 @@
         background-color:var(--ink);
         color:var(--cream);
         -webkit-font-smoothing:antialiased;
+        position:relative;
     }
     .font-display{font-family:'Space Grotesk',sans-serif;}
     .font-mono{font-family:'IBM Plex Mono',monospace;}
@@ -35,6 +36,13 @@
     ::-webkit-scrollbar{width:8px;}
     ::-webkit-scrollbar-track{background:var(--ink);}
     ::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+
+    /* Textura de grano sutil para dar profundidad premium */
+    .grain-overlay{
+        position:fixed; inset:0; z-index:60; pointer-events:none;
+        opacity:.05; mix-blend-mode:overlay;
+        background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
 
     .hero-bg{
         background-image:linear-gradient(rgba(9,12,15,0.94), rgba(9,12,15,0.94)), url('hero.png');
@@ -54,27 +62,92 @@
         }
     }
 
+    .text-gradient{
+        background:linear-gradient(95deg, var(--orange), var(--gold));
+        -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+
     @keyframes riseIn{
         from{opacity:0; transform:translateY(14px);}
         to{opacity:1; transform:translateY(0);}
     }
-    .rise-in{animation:riseIn .7s cubic-bezier(.2,.7,.3,1) both;}
+    .rise-in{animation:riseIn .8s cubic-bezier(.2,.7,.3,1) both;}
+    .rise-in-delay{animation:riseIn .8s cubic-bezier(.2,.7,.3,1) .15s both;}
+
+    @keyframes softBounce{
+        0%,100%{transform:translateY(0);}
+        50%{transform:translateY(6px);}
+    }
+    .bounce-cue{animation:softBounce 2.2s ease-in-out infinite;}
+
+    .reveal{opacity:0; transform:translateY(28px); transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);}
+    .reveal.in-view{opacity:1; transform:translateY(0);}
+
     @media (prefers-reduced-motion: reduce){
-        .rise-in{animation:none;}
+        .rise-in, .rise-in-delay, .bounce-cue{animation:none;}
+        .reveal{opacity:1; transform:none; transition:none;}
     }
 
     .spec-card{
         background:var(--panel);
         border:1px solid var(--line);
-        border-radius:10px;
-        transition:border-color .2s ease, transform .2s ease;
+        border-radius:12px;
+        transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
     }
-    .spec-card:hover{border-color:#3a4048; transform:translateY(-2px);}
+    .spec-card:hover{border-color:#3a4048; transform:translateY(-3px); box-shadow:0 20px 40px -20px rgba(0,0,0,.6);}
+
+    .icon-badge{
+        width:2.75rem; height:2.75rem; border-radius:9px;
+        display:flex; align-items:center; justify-content:center;
+        background:rgba(225,133,46,.1); color:var(--orange);
+    }
+
+    .btn-primary{
+        display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+        background:var(--orange); color:#100b06; font-weight:600;
+        padding:.85rem 1.65rem; border-radius:9px; font-size:.875rem;
+        box-shadow:0 10px 28px -10px rgba(225,133,46,.55);
+        transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .btn-primary:hover{transform:translateY(-2px); box-shadow:0 16px 34px -10px rgba(225,133,46,.65); background:#ec9647;}
+
+    .btn-secondary{
+        display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+        border:1px solid var(--line); color:var(--cream); font-weight:600;
+        padding:.85rem 1.65rem; border-radius:9px; font-size:.875rem;
+        transition:border-color .18s ease, background .18s ease, transform .18s ease;
+    }
+    .btn-secondary:hover{border-color:#3a4048; background:var(--panel); transform:translateY(-2px);}
+
+    .btn-ghost-sm{
+        display:inline-flex; align-items:center; gap:.4rem;
+        border:1px solid var(--line); color:var(--cream); font-weight:600;
+        padding:.5rem 1.1rem; border-radius:8px; font-size:.75rem;
+        transition:border-color .18s ease, background .18s ease;
+    }
+    .btn-ghost-sm:hover{border-color:var(--orange); background:rgba(225,133,46,.08);}
+
+    .process-node::before{
+        content:'';
+        position:absolute; left:50%; top:0; transform:translateX(-50%);
+        width:10px; height:10px; border-radius:50%;
+        background:var(--ink); border:2px solid var(--orange);
+    }
+
+    .cta-panel{
+        background:
+            radial-gradient(circle at 15% 15%, rgba(225,133,46,.14), transparent 45%),
+            radial-gradient(circle at 85% 85%, rgba(242,183,5,.09), transparent 45%),
+            var(--panel);
+        border:1px solid var(--line);
+    }
 
     .focus-ring:focus-visible{outline:2px solid var(--orange); outline-offset:3px;}
 </style>
 </head>
 <body class="min-h-screen overflow-x-hidden selection:bg-[color:var(--orange)] selection:text-black">
+
+    <div class="grain-overlay"></div>
 
     <!-- AVISO DE CONSTRUCCIÓN -->
     <div class="text-xs md:text-sm py-3 px-6 text-center border-b border-[color:var(--orange)]/40 font-semibold tracking-wide flex items-center justify-center gap-2.5 relative z-50" style="background:#0d1013; color:var(--gold);">
@@ -89,19 +162,25 @@
     <header class="sticky top-0 z-50 w-full backdrop-blur-md border-b px-6 py-3.5" style="background:rgba(10,13,16,.82); border-color:var(--line);">
         <div class="container mx-auto max-w-6xl flex items-center justify-between">
             <img src="logo-light.png" alt="Wexmor Energy" class="h-6 w-auto object-contain">
-            <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono tracking-wider border" style="color:var(--muted); border-color:var(--line);">
-                <i data-lucide="map-pin" class="w-3 h-3" style="color:var(--orange);"></i>
-                CENTROAMÉRICA &amp; CARIBE
-            </span>
+            <div class="flex items-center gap-4">
+                <span class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono tracking-wider border" style="color:var(--muted); border-color:var(--line);">
+                    <i data-lucide="map-pin" class="w-3 h-3" style="color:var(--orange);"></i>
+                    CENTROAMÉRICA &amp; CARIBE
+                </span>
+                <a href="#contacto" class="focus-ring btn-ghost-sm">
+                    Cotizar
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
         </div>
     </header>
 
     <main class="relative z-10">
 
         <!-- HERO -->
-        <section class="hero-bg w-full md:min-h-[92vh] flex items-center">
-            <div class="container mx-auto max-w-6xl px-6 py-12 md:py-20">
-                <div class="max-w-2xl space-y-5 md:space-y-7 rise-in">
+        <section class="hero-bg w-full md:min-h-[88vh] flex items-center relative">
+            <div class="container mx-auto max-w-6xl px-6 py-14 md:py-20">
+                <div class="max-w-2xl space-y-5 md:space-y-6 rise-in">
 
                     <div class="inline-flex items-center gap-2 px-3 py-1 text-[11px] font-mono tracking-widest uppercase rounded-full border" style="color:var(--gold); border-color:rgba(242,183,5,.3); background:rgba(242,183,5,.06);">
                         <i data-lucide="badge-check" class="w-3.5 h-3.5"></i>
@@ -113,7 +192,7 @@
 
                     <div class="space-y-4">
                         <h1 class="font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]" style="color:var(--cream);">
-                            Del contenedor<br>al tejado.
+                            Del contenedor<br>al <span class="text-gradient">tejado.</span>
                         </h1>
                         <div class="space-y-1 pt-1">
                             <p class="text-lg md:text-xl font-semibold" style="color:var(--cream);">
@@ -129,65 +208,62 @@
                         Suministro mayorista de módulos, inversores, acumulación y material eléctrico BOS para instaladores y EPCs, con logística propia hacia los principales puertos de la región.
                     </p>
 
-                    <div class="grid grid-cols-2 gap-y-3 gap-x-6 max-w-md pt-1">
-                        <div class="flex items-center gap-2.5">
-                            <i data-lucide="award" class="w-4 h-4 shrink-0" style="color:var(--orange);"></i>
-                            <span class="text-xs md:text-sm font-medium" style="color:var(--cream);">Marcas Tier 1 certificadas</span>
-                        </div>
-                        <div class="flex items-center gap-2.5">
-                            <i data-lucide="shield-check" class="w-4 h-4 shrink-0" style="color:var(--orange);"></i>
-                            <span class="text-xs md:text-sm font-medium" style="color:var(--cream);">Garantía respaldada</span>
-                        </div>
-                        <div class="flex items-center gap-2.5">
-                            <i data-lucide="package" class="w-4 h-4 shrink-0" style="color:var(--orange);"></i>
-                            <span class="text-xs md:text-sm font-medium" style="color:var(--cream);">Suministro mayorista</span>
-                        </div>
-                        <div class="flex items-center gap-2.5">
-                            <i data-lucide="headset" class="w-4 h-4 shrink-0" style="color:var(--orange);"></i>
-                            <span class="text-xs md:text-sm font-medium" style="color:var(--cream);">Asesoría técnica</span>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row gap-3 pt-3 max-w-xl">
-                        <a href="mailto:sales@wexmorenergy.com" class="focus-ring flex-1 flex items-center gap-3.5 p-3.5 rounded-lg border transition-colors" style="background:var(--panel); border-color:var(--line);">
-                            <div class="p-2.5 rounded-md" style="background:var(--panel-2); color:var(--muted);">
-                                <i data-lucide="mail" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <span class="text-[10px] font-mono tracking-wider uppercase block" style="color:var(--muted);">Contacto comercial</span>
-                                <span class="text-sm font-semibold" style="color:var(--cream);">sales@wexmorenergy.com</span>
-                            </div>
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <a href="#contacto" class="focus-ring btn-primary">
+                            Solicitar cotización
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </a>
-                        <a href="https://wa.me/34669486005" target="_blank" class="focus-ring flex-1 flex items-center gap-3.5 p-3.5 rounded-lg border transition-colors group" style="background:var(--panel); border-color:rgba(225,133,46,.35);">
-                            <div class="p-2.5 rounded-md" style="background:rgba(225,133,46,.1); color:var(--orange);">
-                                <i data-lucide="message-square" class="w-5 h-5"></i>
-                            </div>
-                            <div>
-                                <span class="text-[10px] font-mono tracking-wider uppercase block" style="color:var(--orange);">WhatsApp</span>
-                                <span class="text-sm font-semibold" style="color:var(--cream);">+34 669 48 60 05</span>
-                            </div>
+                        <a href="#capacidades" class="focus-ring btn-secondary">
+                            Ver catálogo
                         </a>
                     </div>
 
                 </div>
             </div>
+            <a href="#confianza" aria-label="Bajar" class="focus-ring hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 bounce-cue">
+                <i data-lucide="chevron-down" class="w-5 h-5" style="color:var(--muted);"></i>
+            </a>
         </section>
 
-        <div class="container mx-auto max-w-6xl px-6 py-20 md:py-24 space-y-20">
+        <!-- FRANJA DE CONFIANZA -->
+        <section id="confianza" class="border-y" style="border-color:var(--line); background:#0d1013;">
+            <div class="container mx-auto max-w-6xl px-6 py-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="award" class="w-5 h-5 shrink-0" style="color:var(--orange);"></i>
+                        <span class="text-xs md:text-sm font-medium" style="color:var(--cream);">Marcas Tier 1 certificadas</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="shield-check" class="w-5 h-5 shrink-0" style="color:var(--orange);"></i>
+                        <span class="text-xs md:text-sm font-medium" style="color:var(--cream);">Garantía respaldada</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="package" class="w-5 h-5 shrink-0" style="color:var(--orange);"></i>
+                        <span class="text-xs md:text-sm font-medium" style="color:var(--cream);">Suministro mayorista</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="headset" class="w-5 h-5 shrink-0" style="color:var(--orange);"></i>
+                        <span class="text-xs md:text-sm font-medium" style="color:var(--cream);">Asesoría técnica</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container mx-auto max-w-6xl px-6 py-20 md:py-24 space-y-24 md:space-y-28">
 
             <!-- CAPACIDADES -->
-            <section class="space-y-12">
-                <div class="max-w-2xl space-y-3">
+            <section id="capacidades" class="space-y-12">
+                <div class="max-w-2xl space-y-3 reveal">
                     <span class="font-mono text-xs tracking-widest uppercase" style="color:var(--orange);">Catálogo</span>
                     <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight" style="color:var(--cream);">Capacidades de suministro</h2>
                     <p class="text-base" style="color:var(--muted);">Equipamiento y logística diseñados para las exigencias climáticas y aduanales de la región.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    <div class="spec-card p-7 flex flex-col justify-between min-h-[270px]">
+                    <div class="spec-card p-7 flex flex-col justify-between min-h-[270px] reveal">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <i data-lucide="sun" class="w-5 h-5" style="color:var(--orange);"></i>
+                                <div class="icon-badge"><i data-lucide="sun" class="w-5 h-5"></i></div>
                                 <span class="font-mono text-[10px] tracking-widest" style="color:var(--muted);">GEN</span>
                             </div>
                             <h3 class="font-display text-xl font-semibold" style="color:var(--cream);">Tecnología fotovoltaica</h3>
@@ -196,10 +272,10 @@
                         <div class="text-[11px] font-mono tracking-wider uppercase pt-4 border-t" style="color:var(--muted); border-color:var(--line);">Marcas Tier 1</div>
                     </div>
 
-                    <div class="spec-card p-7 flex flex-col justify-between min-h-[270px]">
+                    <div class="spec-card p-7 flex flex-col justify-between min-h-[270px] reveal" style="transition-delay:.08s;">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <i data-lucide="ship" class="w-5 h-5" style="color:var(--orange);"></i>
+                                <div class="icon-badge"><i data-lucide="ship" class="w-5 h-5"></i></div>
                                 <span class="font-mono text-[10px] tracking-widest" style="color:var(--muted);">LOG</span>
                             </div>
                             <h3 class="font-display text-xl font-semibold" style="color:var(--cream);">Logística consolidada</h3>
@@ -208,10 +284,10 @@
                         <div class="text-[11px] font-mono tracking-wider uppercase pt-4 border-t" style="color:var(--muted); border-color:var(--line);">Cobertura regional</div>
                     </div>
 
-                    <div class="spec-card p-7 flex flex-col justify-between min-h-[270px]">
+                    <div class="spec-card p-7 flex flex-col justify-between min-h-[270px] reveal" style="transition-delay:.16s;">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
-                                <i data-lucide="cable" class="w-5 h-5" style="color:var(--orange);"></i>
+                                <div class="icon-badge"><i data-lucide="cable" class="w-5 h-5"></i></div>
                                 <span class="font-mono text-[10px] tracking-widest" style="color:var(--muted);">BOS</span>
                             </div>
                             <h3 class="font-display text-xl font-semibold" style="color:var(--cream);">Material de ingeniería</h3>
@@ -222,24 +298,119 @@
                 </div>
             </section>
 
+            <!-- PROCESO -->
+            <section id="proceso" class="space-y-14">
+                <div class="max-w-2xl space-y-3 reveal">
+                    <span class="font-mono text-xs tracking-widest uppercase" style="color:var(--orange);">Proceso</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight" style="color:var(--cream);">Cómo trabajamos</h2>
+                    <p class="text-base" style="color:var(--muted);">Un proceso claro, desde la consulta técnica hasta el soporte postventa.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6 relative">
+                    <div class="hidden md:block absolute top-[14px] left-[12.5%] right-[12.5%] h-px border-t border-dashed" style="border-color:var(--line);"></div>
+
+                    <div class="reveal process-node relative pt-8 space-y-3">
+                        <span class="font-mono text-xs tracking-widest" style="color:var(--orange);">01</span>
+                        <h3 class="font-display text-base font-semibold" style="color:var(--cream);">Consulta técnica</h3>
+                        <p class="text-sm leading-relaxed" style="color:var(--muted);">Analizamos tu proyecto y definimos el equipo fotovoltaico adecuado.</p>
+                    </div>
+                    <div class="reveal process-node relative pt-8 space-y-3" style="transition-delay:.08s;">
+                        <span class="font-mono text-xs tracking-widest" style="color:var(--orange);">02</span>
+                        <h3 class="font-display text-base font-semibold" style="color:var(--cream);">Cotización y disponibilidad</h3>
+                        <p class="text-sm leading-relaxed" style="color:var(--muted);">Confirmamos existencia, condiciones comerciales y tiempos según destino.</p>
+                    </div>
+                    <div class="reveal process-node relative pt-8 space-y-3" style="transition-delay:.16s;">
+                        <span class="font-mono text-xs tracking-widest" style="color:var(--orange);">03</span>
+                        <h3 class="font-display text-base font-semibold" style="color:var(--cream);">Logística y despacho</h3>
+                        <p class="text-sm leading-relaxed" style="color:var(--muted);">Coordinamos el transporte hasta el puerto o aeropuerto de tu país.</p>
+                    </div>
+                    <div class="reveal process-node relative pt-8 space-y-3" style="transition-delay:.24s;">
+                        <span class="font-mono text-xs tracking-widest" style="color:var(--orange);">04</span>
+                        <h3 class="font-display text-base font-semibold" style="color:var(--cream);">Acompañamiento técnico</h3>
+                        <p class="text-sm leading-relaxed" style="color:var(--muted);">Soporte durante la instalación y gestión de garantía con fábrica.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA FINAL -->
+            <section id="contacto" class="cta-panel rounded-2xl p-8 md:p-14 reveal">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    <div class="lg:col-span-6 space-y-4">
+                        <span class="font-mono text-xs tracking-widest uppercase" style="color:var(--orange);">Hablemos de tu proyecto</span>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight leading-tight" style="color:var(--cream);">
+                            ¿Listo para tu próximo proyecto solar?
+                        </h2>
+                        <p class="text-sm md:text-base leading-relaxed max-w-md" style="color:var(--muted);">
+                            Escríbenos con las especificaciones de tu proyecto y te preparamos una propuesta técnica y comercial.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-6 flex flex-col gap-3.5">
+                        <a href="mailto:sales@wexmorenergy.com" class="focus-ring flex items-center gap-3.5 p-4 rounded-lg border transition-colors" style="background:var(--panel-2); border-color:var(--line);">
+                            <div class="p-2.5 rounded-md" style="background:#20262d; color:var(--muted);">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-mono tracking-wider uppercase block" style="color:var(--muted);">Contacto comercial</span>
+                                <span class="text-sm font-semibold" style="color:var(--cream);">sales@wexmorenergy.com</span>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 ml-auto" style="color:var(--muted);"></i>
+                        </a>
+                        <a href="https://wa.me/34669486005" target="_blank" class="focus-ring flex items-center gap-3.5 p-4 rounded-lg border transition-colors" style="background:var(--panel-2); border-color:rgba(225,133,46,.35);">
+                            <div class="p-2.5 rounded-md" style="background:rgba(225,133,46,.12); color:var(--orange);">
+                                <i data-lucide="message-square" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-mono tracking-wider uppercase block" style="color:var(--orange);">WhatsApp</span>
+                                <span class="text-sm font-semibold" style="color:var(--cream);">+34 669 48 60 05</span>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 ml-auto" style="color:var(--orange);"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
 
     <!-- FOOTER -->
-    <footer class="border-t py-14" style="border-color:var(--line);">
-        <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <img src="logo-light.png" alt="Wexmor Energy" class="h-6 w-auto object-contain">
-            <p class="text-xs font-mono" style="color:var(--muted);">&copy; 2026 Wexmor Energy. Todos los derechos reservados.</p>
-            <div class="flex items-center gap-5 text-xs" style="color:var(--muted);">
-                <a href="mailto:sales@wexmorenergy.com" class="hover:text-[color:var(--cream)] transition-colors">sales@wexmorenergy.com</a>
-                <span style="color:var(--line);">&bull;</span>
-                <span>Distribución fotovoltaica</span>
+    <footer class="border-t" style="border-color:var(--line);">
+        <div class="container mx-auto px-6 max-w-6xl py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="space-y-3">
+                <img src="logo-light.png" alt="Wexmor Energy" class="h-6 w-auto object-contain">
+                <p class="text-xs leading-relaxed max-w-[220px]" style="color:var(--muted);">Distribuidor mayorista de equipamiento fotovoltaico para Centroamérica y el Caribe.</p>
+            </div>
+            <div class="space-y-2.5">
+                <span class="text-[11px] font-mono tracking-widest uppercase block" style="color:var(--muted);">Contacto</span>
+                <a href="mailto:sales@wexmorenergy.com" class="block text-sm hover:text-[color:var(--orange)] transition-colors" style="color:var(--cream);">sales@wexmorenergy.com</a>
+                <a href="https://wa.me/34669486005" target="_blank" class="block text-sm hover:text-[color:var(--orange)] transition-colors" style="color:var(--cream);">+34 669 48 60 05</a>
+            </div>
+            <div class="space-y-2.5">
+                <span class="text-[11px] font-mono tracking-widest uppercase block" style="color:var(--muted);">Cobertura</span>
+                <p class="text-sm" style="color:var(--cream);">Centroamérica y Caribe</p>
+            </div>
+        </div>
+        <div class="border-t py-6" style="border-color:var(--line);">
+            <div class="container mx-auto px-6 max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-3">
+                <p class="text-xs font-mono" style="color:var(--muted);">&copy; 2026 Wexmor Energy. Todos los derechos reservados.</p>
+                <p class="text-xs font-mono" style="color:var(--muted);">Distribución fotovoltaica</p>
             </div>
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
 </body>
 </html>
