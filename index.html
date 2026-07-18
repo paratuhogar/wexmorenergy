@@ -8,210 +8,200 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Three.js para WebGL -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        slate: {
-                            950: '#020617',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
+        /* Tipografía del sistema optimizada al estilo Apple */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #000000;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #020617;
+            background: #000000;
         }
         ::-webkit-scrollbar-thumb {
-            background: #eab308;
-            border-radius: 3px;
-        }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .glow-hover:hover {
-            box-shadow: 0 0 35px rgba(234, 179, 8, 0.12);
-            border-color: rgba(234, 179, 8, 0.25);
+            background: #333333;
+            border-radius: 4px;
         }
         
         /* 
-           Filtro CSS avanzado:
-           Inbierte el negro (#000000) a blanco (#ffffff) sin distorsionar el naranja original 
-           de la palabra "energy" gracias a la rotación de matiz (hue-rotate) de 180 grados.
+           Filtro CSS para convertir la palabra negra "WEXMOR" del logotipo a blanco, 
+           manteniendo exactamente el tono naranja de "energy"
         */
         .logo-white-text {
             filter: invert(1) hue-rotate(180deg);
         }
+
+        /* Estilo personalizado para el input range tipo Apple */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-white min-h-screen font-sans overflow-x-hidden selection:bg-amber-500 selection:text-slate-950">
+<body class="text-white min-h-screen overflow-x-hidden selection:bg-neutral-800 selection:text-white">
 
-    <!-- Canvas para el fondo WebGL (Partículas de flujo energético) -->
-    <canvas id="webgl-bg" class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-50"></canvas>
+    <!-- Banner superior de aviso (Estilo Apple Announcement) -->
+    <div class="bg-neutral-950 text-neutral-400 text-xs py-2.5 px-6 text-center border-b border-neutral-900 font-medium tracking-wide">
+        Sitio web oficial en construcción. Próximo lanzamiento para Centroamérica y el Caribe.
+    </div>
 
-    <!-- Header -->
-    <header class="sticky top-0 z-50 w-full glass-card border-b border-slate-900 px-6 py-4">
-        <div class="container mx-auto flex items-center justify-between">
-            <!-- Logo pequeño en cabecera con el filtro de texto blanco -->
+    <!-- Header minimalista estilo barra de navegación de Apple -->
+    <header class="sticky top-0 z-50 w-full bg-black/80 backdrop-blur-md border-b border-neutral-900 px-6 py-4">
+        <div class="container mx-auto max-w-6xl flex items-center justify-between">
             <div class="flex items-center">
-                <img src="logo.png" alt="Wexmor Energy" class="h-8 w-auto object-contain logo-white-text">
+                <img src="logo.png" alt="Wexmor Energy" class="h-7 w-auto object-contain logo-white-text">
             </div>
             <div>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-neutral-900 text-neutral-400 border border-neutral-800">
                     Centroamérica & Caribe
                 </span>
             </div>
         </div>
     </header>
 
-    <!-- Contenedor Principal -->
-    <main class="container mx-auto px-6 py-12 space-y-24 relative z-10">
+    <!-- Contenedor Principal con amplios márgenes de respiración -->
+    <main class="container mx-auto px-6 py-16 md:py-24 space-y-32 relative z-10 max-w-6xl">
 
-        <!-- Hero Section con Logo Grande sin fondos ni auras -->
-        <section class="flex flex-col items-center text-center min-h-[80vh] justify-center space-y-8 max-w-5xl mx-auto pt-6">
+        <!-- Hero Section -->
+        <section class="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
             
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold tracking-wider text-emerald-400 uppercase bg-emerald-400/10 rounded-full border border-emerald-500/20">
-                <i data-lucide="globe" class="w-4 h-4 text-emerald-400 animate-spin" style="animation-duration: 12s;"></i>
-                Canal de Distribución Autorizado
+            <!-- Distintivo de estado: Página en construcción -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 text-xs font-semibold tracking-wider text-amber-500 uppercase bg-amber-500/10 rounded-full border border-amber-500/20">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                Página en Construcción
             </div>
 
-            <!-- CONTENEDOR DEL LOGO GRANDE Y TOTALMENTE INTEGRADO -->
-            <div class="relative w-full max-w-2xl mx-auto flex items-center justify-center py-4">
-                <!-- 
-                     Logo en gran escala: Se eliminó la nube blanca de fondo.
-                     Se aplica la clase .logo-white-text para cambiar el color negro a blanco directamente por código.
-                -->
-                <img src="logo.png" alt="Wexmor Energy" class="h-44 md:h-64 w-auto object-contain logo-white-text transform hover:scale-[1.02] transition-transform duration-500 ease-out">
+            <!-- Logotipo en gran formato integrado limpiamente -->
+            <div class="py-4">
+                <img src="logo.png" alt="Wexmor Energy" class="h-32 md:h-44 w-auto object-contain logo-white-text">
             </div>
             
-            <!-- Propuesta de Valor Principal -->
-            <div class="space-y-3 pt-2">
-                <p class="text-3xl md:text-5xl font-black tracking-tight text-slate-100 max-w-3xl leading-tight">
-                    Distribuidor Especializado en Fotovoltaica
-                </p>
-                <p class="text-xl md:text-3xl font-extrabold text-amber-500 tracking-wider uppercase">
+            <!-- Encabezados con estilo de tipografía de gran contraste y peso visual -->
+            <div class="space-y-4">
+                <h1 class="text-4xl md:text-7xl font-bold tracking-tight text-white leading-[1.15]">
+                    Distribuidor especializado <br class="hidden md:inline">en fotovoltaica.
+                </h1>
+                <p class="text-xl md:text-3xl font-semibold text-neutral-400 tracking-tight">
                     Centro América y Caribe
                 </p>
             </div>
 
-            <p class="text-gray-400 text-lg md:text-xl max-w-2xl leading-relaxed">
-                Estamos estructurando nuestra red de suministro mayorista para abastecer los mejores componentes solares, inversores y materiales eléctricos para instaladores y empresas de la región.
+            <p class="text-neutral-500 text-lg md:text-xl max-w-2xl leading-relaxed font-normal">
+                Estructuramos un suministro mayorista de alta confiabilidad para abastecer componentes solares, inversores y materiales eléctricos a instaladores y empresas de la región.
             </p>
 
-            <!-- Acciones Directas de Contacto -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-md pt-4">
-                <a href="mailto:sales@wexmorenergy.com" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-xl transition-all duration-300 shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5">
-                    <i data-lucide="mail" class="w-5 h-5"></i>
-                    Contacto Comercial
+            <!-- Botones de Acción de Píldora de Alta Fidelidad -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
+                <a href="mailto:sales@wexmorenergy.com" class="inline-flex items-center justify-center bg-white text-black font-semibold rounded-full px-8 py-3.5 hover:bg-neutral-200 transition-colors duration-200 text-base">
+                    Contacto comercial
                 </a>
-                <a href="https://wa.me/34669486005" target="_blank" class="inline-flex items-center justify-center gap-2 px-8 py-4 glass-card hover:bg-white/5 border border-slate-800 hover:border-slate-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:-translate-y-0.5">
-                    <i data-lucide="message-square" class="w-5 h-5 text-amber-400"></i>
-                    Escríbenos por WhatsApp
+                <a href="https://wa.me/34669486005" target="_blank" class="inline-flex items-center gap-1 text-amber-500 hover:underline font-medium text-lg">
+                    Contactar por WhatsApp <i data-lucide="chevron-right" class="w-5 h-5"></i>
                 </a>
             </div>
         </section>
 
-        <!-- Bento Grid: Distribución y Alcance Geográfico -->
-        <section class="space-y-12">
+        <!-- Product Grid (Apple Pro Style Cards) -->
+        <section class="space-y-16">
             <div class="text-center max-w-2xl mx-auto space-y-3">
-                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Capacidades de Suministro</h2>
-                <p class="text-gray-400">Soluciones de equipamiento fotovoltaico y material eléctrico de ingeniería.</p>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Capacidades de Suministro</h2>
+                <p class="text-neutral-400 text-lg">Equipamiento tecnológico diseñado para las exigencias de la región.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Tarjeta 1: Especialización Fotovoltaica -->
-                <div class="glass-card p-8 rounded-2xl glow-hover transition-all duration-300 flex flex-col justify-between space-y-6">
+                <!-- Tarjeta 1 -->
+                <div class="bg-[#1c1c1e] p-8 rounded-3xl border border-neutral-800 flex flex-col justify-between min-h-[300px]">
                     <div class="space-y-4">
-                        <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-400">
+                        <div class="text-neutral-400">
                             <i data-lucide="sun" class="w-6 h-6"></i>
                         </div>
-                        <h3 class="text-xl font-bold">Tecnología Fotovoltaica</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Módulos fotovoltaicos de última generación, inversores de red, sistemas de almacenamiento de litio y estructuras certificadas para soportar ráfagas de viento de categoría ciclónica.
+                        <h3 class="text-2xl font-bold tracking-tight">Tecnología Fotovoltaica</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed font-normal">
+                            Módulos solares de alta eficiencia, inversores de red y sistemas de acumulación de litio. Estructuras certificadas para soportar ráfagas de viento de categoría ciclónica.
                         </p>
                     </div>
-                    <div class="text-xs font-semibold text-amber-400 tracking-wider uppercase border-t border-slate-900 pt-4">Suministro de marcas Tier 1</div>
+                    <div class="text-xs font-semibold text-neutral-500 tracking-wider uppercase pt-4 border-t border-neutral-800/60">Suministro de marcas Tier 1</div>
                 </div>
 
-                <!-- Tarjeta 2: Logística Centroamérica y Caribe -->
-                <div class="glass-card p-8 rounded-2xl glow-hover transition-all duration-300 flex flex-col justify-between space-y-6">
+                <!-- Tarjeta 2 -->
+                <div class="bg-[#1c1c1e] p-8 rounded-3xl border border-neutral-800 flex flex-col justify-between min-h-[300px]">
                     <div class="space-y-4">
-                        <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-400">
+                        <div class="text-neutral-400">
                             <i data-lucide="ship" class="w-6 h-6"></i>
                         </div>
-                        <h3 class="text-xl font-bold">Logística Regional Eficiente</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Infraestructura de distribución optimizada para atender puertos de Centroamérica y el Caribe, facilitando consolidación de carga y despachos ágiles.
+                        <h3 class="text-2xl font-bold tracking-tight">Logística Consolidada</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed font-normal">
+                            Distribución optimizada para atender los principales puertos de Centroamérica y el Caribe, asegurando despachos ágiles y gestiones aduanales eficientes.
                         </p>
                     </div>
-                    <div class="text-xs font-semibold text-emerald-400 tracking-wider uppercase border-t border-slate-900 pt-4">Cobertura Regional Directa</div>
+                    <div class="text-xs font-semibold text-neutral-500 tracking-wider uppercase pt-4 border-t border-neutral-800/60">Logística Integral</div>
                 </div>
 
-                <!-- Tarjeta 3: Materiales Eléctricos -->
-                <div class="glass-card p-8 rounded-2xl glow-hover transition-all duration-300 flex flex-col justify-between space-y-6">
+                <!-- Tarjeta 3 -->
+                <div class="bg-[#1c1c1e] p-8 rounded-3xl border border-neutral-800 flex flex-col justify-between min-h-[300px]">
                     <div class="space-y-4">
-                        <div class="w-12 h-12 bg-teal-500/10 rounded-xl flex items-center justify-center text-teal-400">
+                        <div class="text-neutral-400">
                             <i data-lucide="cable" class="w-6 h-6"></i>
                         </div>
-                        <h3 class="text-xl font-bold">Materiales de Ingeniería</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            Conductores solares (AC/DC), sistemas de protección, cajas de combinación y herramientas de instalación bajo estándares internacionales y normativas aplicables.
+                        <h3 class="text-2xl font-bold tracking-tight">Material de Ingeniería</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed font-normal">
+                            Conductores solares certificados, sistemas de protección avanzados, fusibles y envolventes preparados para soportar condiciones climáticas extremas.
                         </p>
                     </div>
-                    <div class="text-xs font-semibold text-teal-400 tracking-wider uppercase border-t border-slate-900 pt-4">Garantía y Especificación</div>
+                    <div class="text-xs font-semibold text-neutral-500 tracking-wider uppercase pt-4 border-t border-neutral-800/60">Garantía y Especificación</div>
                 </div>
             </div>
         </section>
 
-        <!-- Calculadora de Viabilidad Técnica -->
-        <section class="glass-card rounded-3xl p-8 border border-slate-900 relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-emerald-500/5 pointer-events-none"></div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+        <!-- Calculadora de Viabilidad Técnica (Apple Configurator UI Style) -->
+        <section class="bg-[#1c1c1e] rounded-3xl p-8 md:p-12 border border-neutral-800">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div class="lg:col-span-5 space-y-4">
-                    <div class="p-3 bg-amber-500/10 rounded-xl text-amber-400 w-fit">
+                    <div class="text-neutral-400">
                         <i data-lucide="calculator" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="text-2xl font-bold">Pre-Dimensionamiento Rápido</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Introduce el consumo eléctrico mensual promedio para tener una estimación aproximada del volumen de paneles y espacio en metros cuadrados que requiere un proyecto estándar.
+                    <h3 class="text-3xl font-bold tracking-tight">Cálculo de viabilidad.</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed">
+                        Desliza para introducir el consumo eléctrico mensual y visualizar una estimación del dimensionamiento aproximado, el número de paneles y el espacio requerido para la instalación.
                     </p>
                 </div>
                 
-                <div class="lg:col-span-7 bg-slate-900/50 p-6 rounded-2xl border border-slate-800 space-y-6">
+                <div class="lg:col-span-7 bg-black/40 p-8 rounded-2xl border border-neutral-800 space-y-8">
                     <div>
-                        <div class="flex justify-between text-sm mb-2">
-                            <span class="text-gray-400">Consumo Mensual Promedio</span>
-                            <span class="font-bold text-amber-400" id="consumption-display">1,200 kWh</span>
+                        <div class="flex justify-between text-sm mb-3">
+                            <span class="text-neutral-400 font-medium">Consumo Mensual Estimado</span>
+                            <span class="font-bold text-white text-lg" id="consumption-display">1,200 kWh</span>
                         </div>
-                        <input type="range" id="consumption-input" min="200" max="10000" step="200" value="1200" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500">
+                        <input type="range" id="consumption-input" min="200" max="10000" step="200" value="1200" class="w-full h-1 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-white">
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                            <span class="text-xs text-gray-500 block">Paneles Est. (550W)</span>
-                            <span class="text-lg font-bold text-white" id="panel-display">16 Módulos</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-neutral-800">
+                        <div>
+                            <span class="text-xs text-neutral-500 block uppercase tracking-wider mb-1">Módulos (550W)</span>
+                            <span class="text-2xl font-semibold text-white" id="panel-display">16</span>
                         </div>
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                            <span class="text-xs text-gray-500 block">Área Requerida</span>
-                            <span class="text-lg font-bold text-emerald-400" id="area-display">42 m²</span>
+                        <div>
+                            <span class="text-xs text-neutral-500 block uppercase tracking-wider mb-1">Área de Cubierta</span>
+                            <span class="text-2xl font-semibold text-white" id="area-display">42 m²</span>
                         </div>
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                            <span class="text-xs text-gray-500 block">Potencia de Inversor</span>
-                            <span class="text-lg font-bold text-white" id="power-display">8.8 kW</span>
+                        <div>
+                            <span class="text-xs text-neutral-500 block uppercase tracking-wider mb-1">Potencia Inversor</span>
+                            <span class="text-2xl font-semibold text-white" id="power-display">8.8 kW</span>
                         </div>
                     </div>
                 </div>
@@ -220,119 +210,29 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-900 bg-slate-950/90 relative z-10">
-        <div class="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-            <!-- Logo en el pie de página con texto blanco aplicado -->
+    <!-- Footer Corporativo Minimalista -->
+    <footer class="border-t border-neutral-900 bg-black py-16">
+        <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row items-center justify-between gap-8">
+            <!-- Footer Logo transparente con filtro de contraste -->
             <div class="flex items-center">
-                <img src="logo.png" alt="Wexmor Energy" class="h-8 w-auto object-contain logo-white-text">
+                <img src="logo.png" alt="Wexmor Energy" class="h-7 w-auto object-contain logo-white-text">
             </div>
-            <p class="text-gray-500 text-sm">
+            <p class="text-neutral-600 text-sm">
                 &copy; 2026 Wexmor Energy. Todos los derechos reservados.
             </p>
-            <div class="flex items-center gap-4 text-xs text-gray-400">
-                <a href="mailto:sales@wexmorenergy.com" class="hover:text-amber-400 transition-colors">sales@wexmorenergy.com</a>
-                <span>&bull;</span>
-                <span class="text-gray-600">Fotovoltaica Mayorista</span>
+            <div class="flex items-center gap-6 text-xs text-neutral-500">
+                <a href="mailto:sales@wexmorenergy.com" class="hover:text-white transition-colors">sales@wexmorenergy.com</a>
+                <span class="text-neutral-800">&bull;</span>
+                <span>Distribución Fotovoltaica</span>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts de Interacción -->
     <script>
         lucide.createIcons();
 
-        // ------------------------------------------------------------------
-        // WEBGL: Fondo de partículas solares (Color Oro y Esmeralda)
-        // ------------------------------------------------------------------
-        (function initWebGL() {
-            const canvas = document.getElementById('webgl-bg');
-            if (!canvas) return;
-
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-            camera.position.z = 25;
-
-            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            const count = 1500;
-            const positions = new Float32Array(count * 3);
-            const colors = new Float32Array(count * 3);
-
-            for (let i = 0; i < count * 3; i += 3) {
-                const u = Math.random();
-                const v = Math.random();
-                const theta = u * 2.0 * Math.PI;
-                const phi = Math.acos(2.0 * v - 1.0);
-                const r = 9 + Math.random() * 5;
-
-                positions[i] = r * Math.sin(phi) * Math.cos(theta);
-                positions[i + 1] = r * Math.sin(phi) * Math.sin(theta);
-                positions[i + 2] = r * Math.cos(phi);
-
-                // Mezcla de Oro solar (degradado al tono naranja del logo) y Esmeralda
-                const mixFactor = Math.random();
-                colors[i]     = (0.91 * (1 - mixFactor) + 0.06 * mixFactor);
-                colors[i + 1] = (0.70 * (1 - mixFactor) + 0.72 * mixFactor);
-                colors[i + 2] = (0.08 * (1 - mixFactor) + 0.50 * mixFactor);
-            }
-
-            const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-            const material = new THREE.PointsMaterial({
-                size: 0.15,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.8,
-                blending: THREE.AdditiveBlending
-            });
-
-            const particleSystem = new THREE.Points(geometry, material);
-            scene.add(particleSystem);
-
-            let mouseX = 0, mouseY = 0;
-            let targetX = 0, targetY = 0;
-
-            window.addEventListener('mousemove', (event) => {
-                targetX = (event.clientX - window.innerWidth / 2) / 120;
-                targetY = (event.clientY - window.innerHeight / 2) / 120;
-            });
-
-            const clock = new THREE.Clock();
-
-            function tick() {
-                const elapsedTime = clock.getElapsedTime();
-
-                particleSystem.rotation.y = elapsedTime * 0.03;
-                particleSystem.rotation.x = elapsedTime * 0.01;
-
-                mouseX += (targetX - mouseX) * 0.05;
-                mouseY += (targetY - mouseY) * 0.05;
-
-                particleSystem.position.x = mouseX;
-                particleSystem.position.y = -mouseY;
-
-                renderer.render(scene, camera);
-                requestAnimationFrame(tick);
-            }
-
-            tick();
-
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            });
-        })();
-
-        // ------------------------------------------------------------------
-        // Lógica de cálculo estimativo
-        // ------------------------------------------------------------------
+        // Lógica de cálculo estimativo fotovoltaico
         (function initCalc() {
             const consumptionInput = document.getElementById('consumption-input');
             const consumptionDisplay = document.getElementById('consumption-display');
@@ -351,7 +251,7 @@
                 const area = Math.ceil(numPanels * 2.6); 
                 const sysPower = ((numPanels * 550) / 1000).toFixed(1);
 
-                panelDisplay.textContent = `${numPanels} Módulos`;
+                panelDisplay.textContent = `${numPanels} unidades`;
                 areaDisplay.textContent = `${area} m²`;
                 powerDisplay.textContent = `${sysPower} kW`;
             }
