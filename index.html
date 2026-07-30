@@ -296,6 +296,67 @@
             </div>
         </section>
 
+        <!-- Proceso comercial y condiciones de pago -->
+        <section class="rounded-3xl border border-neutral-800 bg-[#111112] p-8 md:p-12 space-y-10" aria-labelledby="purchase-process-title">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+                <div class="lg:col-span-8 space-y-4">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] text-amber-500 uppercase">
+                        <i data-lucide="ship" class="w-4 h-4"></i>
+                        Compra internacional
+                    </div>
+                    <h2 id="purchase-process-title" class="text-3xl md:text-5xl font-black tracking-tight">Del pedido al embarque.</h2>
+                    <p class="text-neutral-400 text-base md:text-lg leading-relaxed max-w-3xl">
+                        Coordinamos pedidos mayoristas y contenedores completos con envío directo desde Panamá, China, Europa y Estados Unidos.
+                    </p>
+                </div>
+                <div class="lg:col-span-4 rounded-2xl border border-amber-500/25 bg-amber-500/10 p-5">
+                    <span class="text-[10px] font-bold tracking-[0.18em] text-amber-500 uppercase block mb-2">Condición de pago</span>
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="wallet-cards" class="w-6 h-6 text-amber-500"></i>
+                        <div>
+                            <p class="text-xl font-bold text-white">Exclusivamente USDT</p>
+                            <p class="text-xs text-neutral-400 mt-1">Red y datos de pago indicados en cada cotización.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <article class="rounded-2xl border border-neutral-800 bg-[#1c1c1e] p-6 space-y-4">
+                    <div class="w-10 h-10 rounded-xl bg-neutral-800 flex items-center justify-center text-amber-500 font-black">01</div>
+                    <div>
+                        <h3 class="text-lg font-bold">Cotización</h3>
+                        <p class="text-sm text-neutral-400 leading-relaxed mt-2">Definimos productos, cantidades, origen, destino y condiciones logísticas.</p>
+                    </div>
+                </article>
+                <article class="rounded-2xl border border-neutral-800 bg-[#1c1c1e] p-6 space-y-4">
+                    <div class="w-10 h-10 rounded-xl bg-neutral-800 flex items-center justify-center text-amber-500 font-black">02</div>
+                    <div>
+                        <h3 class="text-lg font-bold">30 % para confirmar</h3>
+                        <p class="text-sm text-neutral-400 leading-relaxed mt-2">El pedido se activa con un pago inicial del 30 % en USDT.</p>
+                    </div>
+                </article>
+                <article class="rounded-2xl border border-neutral-800 bg-[#1c1c1e] p-6 space-y-4">
+                    <div class="w-10 h-10 rounded-xl bg-neutral-800 flex items-center justify-center text-amber-500 font-black">03</div>
+                    <div>
+                        <h3 class="text-lg font-bold">Embarque y BL</h3>
+                        <p class="text-sm text-neutral-400 leading-relaxed mt-2">Tras la salida del buque, la naviera emite el Bill of Lading como documento de transporte de la carga.</p>
+                    </div>
+                </article>
+                <article class="rounded-2xl border border-amber-500/25 bg-gradient-to-br from-amber-500/10 to-[#1c1c1e] p-6 space-y-4">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-black font-black">04</div>
+                    <div>
+                        <h3 class="text-lg font-bold">70 % contra BL</h3>
+                        <p class="text-sm text-neutral-300 leading-relaxed mt-2">El saldo se paga en USDT contra la emisión del BL y antes de liberar la documentación.</p>
+                    </div>
+                </article>
+            </div>
+
+            <p class="text-xs text-neutral-500 leading-relaxed border-t border-neutral-800 pt-5">
+                Las condiciones definitivas, la red de USDT y los datos de cada operación se especifican en la cotización, la factura proforma y la documentación comercial aplicable. La función del BL puede variar según su modalidad.
+            </p>
+        </section>
+
         <!-- Calculadora de Viabilidad Técnica (Apple Configurator UI Style) -->
         <section class="bg-[#1c1c1e] rounded-3xl p-8 md:p-12 border border-neutral-800">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -347,8 +408,12 @@
                     </div>
                     <h2 class="text-3xl md:text-5xl font-black tracking-tight leading-tight">¿Necesitas un contenedor completo?</h2>
                     <p class="text-neutral-300 text-base md:text-lg leading-relaxed max-w-2xl">
-                        Preparamos propuestas mayoristas para distribuidores, instaladores, promotores y empresas de Centroamérica y el Caribe, con configuración de producto y logística de origen a destino.
+                        Preparamos propuestas mayoristas para distribuidores, instaladores, promotores y empresas de Centroamérica y el Caribe, con envío directo desde Panamá, China, Europa y Estados Unidos.
                     </p>
+                    <div class="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1.5 text-xs font-semibold text-amber-500">
+                        <i data-lucide="circle-dollar-sign" class="w-4 h-4"></i>
+                        Pagos exclusivamente en USDT
+                    </div>
                 </div>
                 <div class="lg:col-span-4 flex flex-col gap-3">
                     <a href="https://wa.me/15613122929?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20para%20un%20contenedor%20completo%20de%20equipamiento%20solar." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-6 py-4 text-sm font-bold text-black transition-all hover:bg-amber-400 hover:-translate-y-0.5">
