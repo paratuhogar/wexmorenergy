@@ -70,20 +70,20 @@
             transform: scale(1.15);
         }
         .brand-card {
-            min-height: 132px;
+            min-height: 180px;
             background: #ffffff;
         }
         .brand-logo {
             display: block;
             width: auto;
-            max-width: 82%;
+            max-width: 76%;
             height: auto;
-            max-height: 58px;
+            max-height: 92px;
             object-fit: contain;
         }
         .brand-logo-square {
-            max-height: 82px;
-            border-radius: 10px;
+            max-height: 118px;
+            border-radius: 14px;
         }
     </style>
 </head>
@@ -115,6 +115,35 @@
     <!-- Contenedor Principal con amplios márgenes -->
     <main class="container mx-auto px-6 py-8 md:py-12 space-y-24 relative z-10 max-w-6xl">
 
+        <!-- Marcas representadas: máxima visibilidad al inicio -->
+        <section class="space-y-10 pt-4" aria-labelledby="brands-title">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-xs font-bold tracking-[0.2em] text-amber-500 uppercase">Distribución fotovoltaica</span>
+                <h1 id="brands-title" class="text-4xl md:text-6xl font-black tracking-tight">Marcas que distribuimos</h1>
+                <p class="text-neutral-400 text-base md:text-xl">Tecnología solar líder para Centroamérica y el Caribe.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+                <div class="brand-card rounded-3xl border border-neutral-800 flex items-center justify-center px-8 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50">
+                    <img src="assets/brands/must.svg" alt="MUST Energy" class="brand-logo">
+                </div>
+                <div class="brand-card rounded-3xl border border-neutral-800 flex items-center justify-center px-8 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50">
+                    <img src="assets/brands/felicity-logo.png" alt="Felicity Solar" class="brand-logo">
+                </div>
+                <div class="brand-card rounded-3xl border border-neutral-800 flex items-center justify-center px-8 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50">
+                    <img src="assets/brands/deye.svg" alt="Deye" class="brand-logo">
+                </div>
+                <div class="brand-card rounded-3xl border border-neutral-800 flex items-center justify-center px-8 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50">
+                    <img src="assets/brands/longi.png" alt="LONGi" class="brand-logo brand-logo-square">
+                </div>
+                <div class="brand-card rounded-3xl border border-neutral-800 flex items-center justify-center px-8 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50">
+                    <img src="assets/brands/trina.svg" alt="Trina Solar" class="brand-logo">
+                </div>
+                <div class="brand-card rounded-3xl border border-neutral-800 flex items-center justify-center px-8 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50">
+                    <img src="assets/brands/ecoflow.png" alt="EcoFlow" class="brand-logo">
+                </div>
+            </div>
+        </section>
+
         <!-- SECCIÓN HERO: DISEÑO CON ESPACIOS PERFECTAMENTE EQUILIBRADOS -->
         <section class="w-full relative overflow-hidden rounded-3xl border border-neutral-900 shadow-2xl responsive-hero min-h-[85vh] flex items-center">
             
@@ -139,10 +168,10 @@
                     
                     <!-- Titulares y Propuesta de Valor -->
                     <div class="space-y-2.5">
-                        <h1 class="text-3xl md:text-5xl font-black tracking-tight text-white leading-tight">
+                        <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white leading-tight">
                             Energía solar.<br>
                             <span class="text-amber-500">Soluciones reales.</span>
-                        </h1>
+                        </h2>
                         <div class="space-y-1">
                             <p class="text-base md:text-lg font-bold tracking-tight text-neutral-200">
                                 Distribuidor especializado en fotovoltaica.
@@ -207,35 +236,6 @@
                 
                 <!-- Columna derecha vacía (7 columnas de espacio libre para mostrar el atardecer y los equipos fotovoltaicos) -->
                 <div class="lg:col-span-7 hidden lg:block"></div>
-            </div>
-        </section>
-
-        <!-- Marcas representadas -->
-        <section class="space-y-10" aria-labelledby="brands-title">
-            <div class="text-center max-w-3xl mx-auto space-y-3">
-                <span class="text-xs font-bold tracking-[0.2em] text-amber-500 uppercase">Portafolio multimarca</span>
-                <h2 id="brands-title" class="text-3xl md:text-4xl font-bold tracking-tight">Marcas con las que trabajamos</h2>
-                <p class="text-neutral-400 text-base md:text-lg">Tecnología solar, inversores, baterías y soluciones de almacenamiento de fabricantes reconocidos.</p>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-                <div class="brand-card rounded-2xl border border-neutral-800 flex items-center justify-center px-5 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700">
-                    <img src="assets/brands/must.svg" alt="MUST Energy" class="brand-logo">
-                </div>
-                <div class="brand-card rounded-2xl border border-neutral-800 flex items-center justify-center px-4 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700">
-                    <img src="assets/brands/felicity-logo.png" alt="Felicity Solar" class="brand-logo">
-                </div>
-                <div class="brand-card rounded-2xl border border-neutral-800 flex items-center justify-center px-5 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700">
-                    <img src="assets/brands/deye.svg" alt="Deye" class="brand-logo">
-                </div>
-                <div class="brand-card rounded-2xl border border-neutral-800 flex items-center justify-center px-5 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700">
-                    <img src="assets/brands/longi.png" alt="LONGi" class="brand-logo brand-logo-square">
-                </div>
-                <div class="brand-card rounded-2xl border border-neutral-800 flex items-center justify-center px-5 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700">
-                    <img src="assets/brands/trina.svg" alt="Trina Solar" class="brand-logo">
-                </div>
-                <div class="brand-card rounded-2xl border border-neutral-800 flex items-center justify-center px-5 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-700">
-                    <img src="assets/brands/ecoflow.png" alt="EcoFlow" class="brand-logo">
-                </div>
             </div>
         </section>
 
