@@ -91,17 +91,46 @@
             max-height: 110px;
         }
         .equipment-media {
+            position: relative;
+            height: 300px;
             min-height: 250px;
             background:
-                radial-gradient(circle at 75% 15%, rgba(245, 158, 11, 0.12), transparent 36%),
-                linear-gradient(145deg, #f8fafc 0%, #e5e7eb 100%);
+                radial-gradient(circle at 68% 28%, rgba(59, 130, 246, 0.18), transparent 34%),
+                radial-gradient(circle at 22% 80%, rgba(245, 158, 11, 0.1), transparent 38%),
+                linear-gradient(145deg, #17181b 0%, #070708 100%);
+        }
+        .equipment-media::after {
+            content: "";
+            position: absolute;
+            inset: auto 15% 7% 15%;
+            height: 18%;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.72);
+            filter: blur(24px);
+            pointer-events: none;
         }
         .equipment-media img {
+            position: relative;
+            z-index: 1;
             width: 100%;
             height: 100%;
-            min-height: 250px;
             object-fit: contain;
             transition: transform 0.45s ease;
+        }
+        .equipment-media-photo {
+            padding: 0 !important;
+        }
+        .equipment-media-photo::after {
+            display: none;
+        }
+        .equipment-media-photo img {
+            object-fit: cover;
+        }
+        .equipment-media-longi img {
+            object-position: 72% center;
+        }
+        .equipment-media-trina img {
+            object-position: center;
         }
         .equipment-card:hover .equipment-media img {
             transform: scale(1.035);
@@ -109,6 +138,11 @@
         .spec-chip {
             border: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.045);
+        }
+        @media (max-width: 640px) {
+            .equipment-media {
+                height: 250px;
+            }
         }
     </style>
 </head>
@@ -339,8 +373,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <article class="equipment-card overflow-hidden rounded-3xl border border-neutral-800 bg-[#111112] transition hover:-translate-y-1 hover:border-red-500/40">
-                    <div class="equipment-media overflow-hidden p-6 md:p-8">
-                        <img src="https://static.longi.com/Himox10_20241010_kv_e71575c775.jpg" alt="Módulo solar LONGi Hi-MO X10" loading="lazy">
+                    <div class="equipment-media equipment-media-photo equipment-media-longi overflow-hidden">
+                        <img src="assets/products/longi-x10-original.jpg" alt="Módulo solar LONGi Hi-MO X10" loading="lazy">
                     </div>
                     <div class="p-7 md:p-8 space-y-5">
                         <div>
@@ -353,15 +387,20 @@
                             <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">24,8 % eficiencia</span>
                             <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">Tecnología HPBC 2.0</span>
                         </div>
-                        <a href="https://www.longi.com/en/products/modules-series/hi-mo-x10/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-300 hover:text-amber-500">
-                            Ver ficha del fabricante <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
+                        <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                            <a href="https://wa.me/15613122929?text=Hola%2C%20quiero%20cotizar%20paneles%20LONGi%20Hi-MO%20X10." target="_blank" rel="noopener noreferrer" class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-amber-500 px-4 py-3 text-sm font-bold text-black hover:bg-amber-400">
+                                <i data-lucide="message-square" class="w-4 h-4"></i> Cotizar este equipo
+                            </a>
+                            <a href="https://www.longi.com/en/products/modules-series/hi-mo-x10/" target="_blank" rel="noopener noreferrer" aria-label="Ver ficha oficial de LONGi Hi-MO X10" class="inline-flex items-center justify-center rounded-xl border border-neutral-700 px-4 py-3 text-neutral-300 hover:border-neutral-500 hover:text-white">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
                     </div>
                 </article>
 
                 <article class="equipment-card overflow-hidden rounded-3xl border border-neutral-800 bg-[#111112] transition hover:-translate-y-1 hover:border-sky-500/40">
-                    <div class="equipment-media overflow-hidden p-6 md:p-8">
-                        <img src="https://www-cdn.trinasolar.com/wwwstorage/sites/17/us-Trinasolar%20Vertex%20N%20Modules-m2-1-2.jpg" alt="Módulos solares Trina Solar Vertex N" loading="lazy">
+                    <div class="equipment-media equipment-media-photo equipment-media-trina overflow-hidden">
+                        <img src="assets/products/trina-vertex-n-original.jpg" alt="Módulos solares Trina Solar Vertex N" loading="lazy">
                     </div>
                     <div class="p-7 md:p-8 space-y-5">
                         <div>
@@ -374,15 +413,20 @@
                             <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">N-type TOPCon</span>
                             <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">Bifacial dual glass</span>
                         </div>
-                        <a href="https://www.trinasolar.com/us/vertex-n-series/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-300 hover:text-amber-500">
-                            Ver ficha del fabricante <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
+                        <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                            <a href="https://wa.me/15613122929?text=Hola%2C%20quiero%20cotizar%20paneles%20Trina%20Solar%20Vertex%20N." target="_blank" rel="noopener noreferrer" class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-amber-500 px-4 py-3 text-sm font-bold text-black hover:bg-amber-400">
+                                <i data-lucide="message-square" class="w-4 h-4"></i> Cotizar este equipo
+                            </a>
+                            <a href="https://www.trinasolar.com/us/vertex-n-series/" target="_blank" rel="noopener noreferrer" aria-label="Ver ficha oficial de Trina Vertex N" class="inline-flex items-center justify-center rounded-xl border border-neutral-700 px-4 py-3 text-neutral-300 hover:border-neutral-500 hover:text-white">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
                     </div>
                 </article>
 
                 <article class="equipment-card overflow-hidden rounded-3xl border border-neutral-800 bg-[#111112] transition hover:-translate-y-1 hover:border-blue-500/40">
                     <div class="equipment-media overflow-hidden p-6 md:p-8">
-                        <img src="https://www.deyeinverter.com/deyeinverter/2025/05/30/15.png" alt="Inversor híbrido trifásico Deye de 50 kW" loading="lazy">
+                        <img src="assets/products/deye-50kw-premium.png" alt="Inversor híbrido trifásico Deye de 50 kW" loading="lazy">
                     </div>
                     <div class="p-7 md:p-8 space-y-5">
                         <div>
@@ -395,15 +439,20 @@
                             <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">4 MPPT</span>
                             <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">Hasta 10 en paralelo</span>
                         </div>
-                        <a href="https://www.deyeinverter.com/product/three-phase-high-voltage-hybrid-inverter/sun29-9-30-35-40-50ksg01hp3eubm3-4-29-950kw-three-phase-2-3-4-mppt-hybrid-inverter-hv-battery-supported-339.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-300 hover:text-amber-500">
-                            Ver ficha del fabricante <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
+                        <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                            <a href="https://wa.me/15613122929?text=Hola%2C%20quiero%20cotizar%20el%20inversor%20h%C3%ADbrido%20Deye%20de%2050%20kW." target="_blank" rel="noopener noreferrer" class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-amber-500 px-4 py-3 text-sm font-bold text-black hover:bg-amber-400">
+                                <i data-lucide="message-square" class="w-4 h-4"></i> Cotizar este equipo
+                            </a>
+                            <a href="https://www.deyeinverter.com/product/three-phase-high-voltage-hybrid-inverter/sun29-9-30-35-40-50ksg01hp3eubm3-4-29-950kw-three-phase-2-3-4-mppt-hybrid-inverter-hv-battery-supported-339.html" target="_blank" rel="noopener noreferrer" aria-label="Ver ficha oficial del inversor Deye de 50 kW" class="inline-flex items-center justify-center rounded-xl border border-neutral-700 px-4 py-3 text-neutral-300 hover:border-neutral-500 hover:text-white">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
                     </div>
                 </article>
 
                 <article class="equipment-card overflow-hidden rounded-3xl border border-neutral-800 bg-[#111112] transition hover:-translate-y-1 hover:border-neutral-500">
                     <div class="equipment-media overflow-hidden p-6 md:p-8">
-                        <img src="https://us.ecoflow.com/cdn/shop/files/ecoflow-ecoflow-delta-pro-ultra-whole-home-backup-power-ul-9540-certificated-dpu-bundle-delta-pro-ultra-1-x-inverter-1-x-battery-1249296412.webp?v=1784197599&amp;width=1240" alt="Sistema de almacenamiento EcoFlow DELTA Pro Ultra" loading="lazy">
+                        <img src="assets/products/ecoflow-dpu-premium.png" alt="Sistema de almacenamiento EcoFlow DELTA Pro Ultra" loading="lazy">
                     </div>
                     <div class="p-7 md:p-8 space-y-5">
                         <div>
@@ -416,9 +465,14 @@
                             <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">7,2 kW de salida</span>
                             <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">Escalable hasta 90 kWh</span>
                         </div>
-                        <a href="https://us.ecoflow.com/collections/delta-pro-series/products/delta-pro-ultra" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-300 hover:text-amber-500">
-                            Ver ficha del fabricante <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
+                        <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                            <a href="https://wa.me/15613122929?text=Hola%2C%20quiero%20cotizar%20el%20sistema%20EcoFlow%20DELTA%20Pro%20Ultra." target="_blank" rel="noopener noreferrer" class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-amber-500 px-4 py-3 text-sm font-bold text-black hover:bg-amber-400">
+                                <i data-lucide="message-square" class="w-4 h-4"></i> Cotizar este equipo
+                            </a>
+                            <a href="https://us.ecoflow.com/collections/delta-pro-series/products/delta-pro-ultra" target="_blank" rel="noopener noreferrer" aria-label="Ver ficha oficial de EcoFlow DELTA Pro Ultra" class="inline-flex items-center justify-center rounded-xl border border-neutral-700 px-4 py-3 text-neutral-300 hover:border-neutral-500 hover:text-white">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
                     </div>
                 </article>
             </div>
