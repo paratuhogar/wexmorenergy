@@ -384,7 +384,7 @@
                     </div>
                     <h2 id="equipment-title" class="text-3xl md:text-5xl font-black tracking-tight">Equipos que puedes solicitar</h2>
                     <p class="text-neutral-400 text-base md:text-lg leading-relaxed max-w-3xl">
-                        Seleccionamos paneles, inversores y almacenamiento de fabricantes reconocidos. Podemos cotizar un solo modelo, una solución completa o una carga mixta.
+                        Seleccionamos paneles, inversores y almacenamiento de fabricantes reconocidos para operaciones mayoristas. Cada solicitud corresponde a contenedores completos de una sola fábrica y referencia.
                     </p>
                 </div>
                 <div class="lg:col-span-4">
@@ -548,15 +548,15 @@
                             <i data-lucide="combine" class="w-6 h-6"></i>
                         </div>
                         <div>
-                            <span class="text-[10px] font-bold tracking-[0.18em] text-neutral-500 uppercase">Contenedor mixto</span>
-                            <h4 class="text-xl font-black mt-1">Soluciones listas para vender</h4>
+                            <span class="text-[10px] font-bold tracking-[0.18em] text-neutral-500 uppercase">Carga completa</span>
+                            <h4 class="text-xl font-black mt-1">Directo desde una fábrica</h4>
                         </div>
                         <p class="text-sm text-neutral-300 leading-relaxed">
-                            Paneles, inversores de distintas potencias, baterías de litio, EcoFlow, cableado, protecciones y repuestos en una misma operación.
+                            Elige una referencia y solicita uno o varios contenedores completos. La fábrica confirma unidades, paletización, disponibilidad y plazo de producción.
                         </p>
                         <ul class="space-y-2 text-sm text-neutral-400">
-                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>Catálogo variado para reventa e instalación</li>
-                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>Mezcla ajustada a presupuesto y mercado</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>Precio mayorista para carga completa</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>Sin mezclar productos de fábricas diferentes</li>
                         </ul>
                     </article>
                 </div>
@@ -564,7 +564,7 @@
                 <div class="rounded-2xl border border-neutral-800 bg-neutral-950 px-5 py-4 flex items-start gap-3 text-xs text-neutral-500 leading-relaxed">
                     <i data-lucide="info" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
                     <p>
-                        Las configuraciones son orientativas. La cantidad final depende del modelo, dimensiones, paletización, peso, origen, destino y aceptación de la naviera. Los equipos con baterías de litio requieren revisión específica de transporte y documentación.
+                        No se preparan contenedores mixtos entre fábricas. Las unidades por contenedor son orientativas hasta que el fabricante confirme modelo, dimensiones, paletización, peso y disponibilidad. Los equipos con baterías de litio requieren revisión específica de transporte y documentación.
                     </p>
                 </div>
             </div>
@@ -640,9 +640,9 @@
                             <i data-lucide="container" class="w-4 h-4"></i>
                             Configurador 40’ HC
                         </div>
-                        <h2 id="configurator-title" class="text-3xl md:text-5xl font-black tracking-tight">Construye tu contenedor.</h2>
+                        <h2 id="configurator-title" class="text-3xl md:text-5xl font-black tracking-tight">Cotiza un contenedor completo.</h2>
                         <p class="text-neutral-300 text-base md:text-lg leading-relaxed max-w-3xl">
-                            Explora el catálogo, selecciona cantidades y envía una propuesta detallada por WhatsApp. Nosotros validaremos embalaje, compatibilidad, disponibilidad y transporte.
+                            Elige un producto y la cantidad de contenedores de 40’ HC que necesitas. Cada solicitud corresponde a una sola referencia y fábrica; nosotros confirmaremos unidades, embalaje, disponibilidad y transporte.
                         </p>
                     </div>
                     <div class="lg:col-span-4 grid grid-cols-2 gap-3">
@@ -677,7 +677,7 @@
                     <div class="flex items-center justify-between gap-4">
                         <div>
                             <p class="text-sm font-semibold text-white" id="results-label">Catálogo completo</p>
-                            <p class="text-xs text-neutral-500 mt-1">Los botones +/− agregan o quitan un pallet de referencia. Disponibilidad y embalaje exactos sujetos a cotización.</p>
+                            <p class="text-xs text-neutral-500 mt-1">Selecciona una referencia y el número de contenedores completos. No es posible mezclar fábricas en una misma carga.</p>
                         </div>
                         <button id="clear-filters" type="button" class="text-xs font-semibold text-neutral-500 hover:text-white">Limpiar filtros</button>
                     </div>
@@ -690,32 +690,19 @@
                         <div class="flex items-start justify-between gap-4">
                             <div>
                                 <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-500">Propuesta actual</span>
-                                <h3 id="cart-title" class="text-2xl font-black mt-1">Contenedor 40’ HC</h3>
+                                <h3 id="cart-title" class="text-2xl font-black mt-1">Solicitud mayorista</h3>
                             </div>
                             <button id="reset-container" type="button" class="text-xs font-semibold text-neutral-500 hover:text-red-400">Vaciar</button>
                         </div>
 
-                        <div class="mt-6">
-                            <div class="flex justify-between items-end mb-2">
+                        <div class="mt-6 rounded-2xl border border-amber-500/20 bg-black/30 p-4">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="factory" class="w-5 h-5 text-amber-500 shrink-0"></i>
                                 <div>
-                                    <span class="text-xs text-neutral-500">Ocupación estimada</span>
-                                    <strong id="capacity-percent" class="block text-3xl font-black text-white">0 %</strong>
+                                    <p class="text-sm font-bold">Una referencia por solicitud</p>
+                                    <p class="text-[11px] text-neutral-500 leading-relaxed mt-1">Puedes solicitar varios contenedores, pero todos serán del producto seleccionado y se cargarán desde su fábrica de origen.</p>
                                 </div>
-                                <span id="capacity-status" class="rounded-full border border-neutral-700 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-neutral-400">Vacío</span>
                             </div>
-                            <div class="h-3 overflow-hidden rounded-full bg-black border border-neutral-800">
-                                <div id="capacity-fill" class="capacity-bar h-full rounded-full transition-all duration-500" style="width:0%"></div>
-                            </div>
-                            <p class="text-[11px] text-neutral-500 leading-relaxed mt-3">Estimación volumétrica inicial. La carga definitiva requiere validación de pallets, peso y mercancía regulada.</p>
-                        </div>
-                    </div>
-
-                    <div class="p-5 border-b border-neutral-800">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-500">Comenzar con una plantilla</span>
-                        <div class="grid grid-cols-1 gap-2 mt-3">
-                            <button type="button" data-template="panels" class="template-btn rounded-xl border border-neutral-800 bg-black/40 px-4 py-3 text-left text-sm font-semibold hover:border-amber-500/50">Contenedor de paneles</button>
-                            <button type="button" data-template="industrial" class="template-btn rounded-xl border border-neutral-800 bg-black/40 px-4 py-3 text-left text-sm font-semibold hover:border-amber-500/50">Proyecto comercial + baterías</button>
-                            <button type="button" data-template="retail" class="template-btn rounded-xl border border-neutral-800 bg-black/40 px-4 py-3 text-left text-sm font-semibold hover:border-amber-500/50">Carga mixta para distribución</button>
                         </div>
                     </div>
 
@@ -724,8 +711,8 @@
                         <div class="w-12 h-12 mx-auto rounded-2xl bg-neutral-900 flex items-center justify-center text-neutral-600">
                             <i data-lucide="package-plus" class="w-6 h-6"></i>
                         </div>
-                        <p class="font-semibold mt-4">Tu contenedor está vacío</p>
-                        <p class="text-xs text-neutral-500 mt-2">Añade productos o utiliza una plantilla.</p>
+                        <p class="font-semibold mt-4">Selecciona un producto</p>
+                        <p class="text-xs text-neutral-500 mt-2">Elige la referencia que deseas importar en contenedor completo.</p>
                     </div>
 
                     <div class="p-5 border-t border-neutral-800 space-y-3">
@@ -956,7 +943,7 @@
 
             function loadSavedCart() {
                 try {
-                    const saved = JSON.parse(localStorage.getItem('wexmor-container-v1') || '{}');
+                    const saved = JSON.parse(localStorage.getItem('wexmor-full-container-v2') || '{}');
                     return saved && typeof saved === 'object' && !Array.isArray(saved) ? saved : {};
                 } catch {
                     return {};
@@ -1040,9 +1027,9 @@
                                     ? `<a href="${product.pdf}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-400 hover:text-white"><i data-lucide="file-text" class="w-3.5 h-3.5"></i>PDF original</a>`
                                     : '<span class="text-[10px] font-medium text-neutral-600">Especificaciones del fabricante</span>'}
                                 <div class="flex items-center rounded-xl border border-neutral-700 bg-black overflow-hidden">
-                                    <button type="button" data-action="minus" data-id="${product.id}" class="w-10 h-10 text-lg text-neutral-400 hover:bg-neutral-800 hover:text-white" aria-label="Quitar ${product.model}">−</button>
-                                    <span class="min-w-14 text-center"><strong class="block text-sm leading-none">${quantity}</strong><small class="text-[8px] text-neutral-500">unidades</small></span>
-                                    <button type="button" data-action="plus" data-id="${product.id}" class="w-10 h-10 text-lg text-black bg-amber-500 hover:bg-amber-400" aria-label="Añadir ${product.model}">+</button>
+                                    <button type="button" data-action="minus" data-id="${product.id}" class="w-10 h-10 text-lg text-neutral-400 hover:bg-neutral-800 hover:text-white" aria-label="Quitar un contenedor de ${product.model}">−</button>
+                                    <span class="min-w-16 text-center"><strong class="block text-sm leading-none">${quantity}</strong><small class="text-[8px] text-neutral-500">contenedor${quantity === 1 ? '' : 'es'}</small></span>
+                                    <button type="button" data-action="plus" data-id="${product.id}" class="w-10 h-10 text-lg text-black bg-amber-500 hover:bg-amber-400" aria-label="Cotizar un contenedor de ${product.model}">+</button>
                                 </div>
                             </div>
                         </article>`;
@@ -1051,7 +1038,7 @@
                 grid.querySelectorAll('[data-action]').forEach(button => {
                     button.addEventListener('click', () => {
                         const product = CATALOG.find(item => item.id === button.dataset.id);
-                        changeQuantity(button.dataset.id, button.dataset.action === 'plus' ? product.step : -product.step);
+                        changeQuantity(button.dataset.id, button.dataset.action === 'plus' ? 1 : -1);
                     });
                 });
             }
@@ -1062,20 +1049,22 @@
                     .map(product => ({product, quantity: state.cart[product.id]}));
             }
 
-            function capacity() {
-                return cartEntries().reduce((sum, entry) => sum + entry.product.fill * entry.quantity, 0);
-            }
-
             function saveCart() {
-                localStorage.setItem('wexmor-container-v1', JSON.stringify(state.cart));
+                localStorage.setItem('wexmor-full-container-v2', JSON.stringify(state.cart));
             }
 
             function changeQuantity(id, delta, exactValue) {
                 const product = CATALOG.find(item => item.id === id);
                 if (!product) return;
+                const selected = cartEntries()[0];
+                if (selected && selected.product.id !== id) {
+                    const replace = window.confirm(`La solicitud solo puede contener una referencia.\n\n¿Reemplazar ${selected.product.brand} ${selected.product.model} por ${product.brand} ${product.model}?`);
+                    if (!replace) return;
+                    state.cart = {};
+                }
                 const current = state.cart[id] || 0;
                 const next = exactValue !== undefined ? exactValue : Math.max(0, current + delta);
-                if (next > 9999) return;
+                if (next > 99) return;
                 if (next === 0) delete state.cart[id];
                 else state.cart[id] = next;
                 saveCart();
@@ -1088,52 +1077,32 @@
 
             function renderCart() {
                 const entries = cartEntries();
-                const used = capacity();
-                const display = Math.min(used, 100);
-                $('capacity-percent').textContent = `${Math.round(used)} %`;
-                $('capacity-fill').style.width = `${display}%`;
-                $('capacity-fill').classList.toggle('bg-red-500', used > 100);
                 emptyCart.classList.toggle('hidden', entries.length > 0);
                 cartItems.classList.toggle('hidden', entries.length === 0);
                 $('send-proposal').disabled = entries.length === 0;
                 $('copy-proposal').disabled = entries.length === 0;
-
-                const status = $('capacity-status');
-                if (!entries.length) {
-                    status.textContent = 'Vacío';
-                    status.className = 'rounded-full border border-neutral-700 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-neutral-400';
-                } else if (used < 85) {
-                    status.textContent = 'Disponible';
-                    status.className = 'rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-400';
-                } else if (used <= 100) {
-                    status.textContent = 'Casi completo';
-                    status.className = 'rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-400';
-                } else {
-                    status.textContent = 'Revisar carga';
-                    status.className = 'rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-red-400';
-                }
 
                 cartItems.innerHTML = entries.map(({product, quantity}) => `
                     <div class="p-4 flex items-center gap-3">
                         <div class="min-w-0 flex-1">
                             <span class="text-[9px] font-bold uppercase tracking-wider text-amber-500">${product.brand}</span>
                             <p class="text-sm font-bold truncate">${product.model}</p>
-                            <p class="text-[10px] text-neutral-500">${quantity} uds. · ${(quantity / product.step).toLocaleString('es-ES', {maximumFractionDigits:1})} pallets ref.</p>
+                            <p class="text-[10px] text-neutral-500">${quantity} ${quantity === 1 ? 'contenedor completo' : 'contenedores completos'} · 40’ HC</p>
                         </div>
                         <div class="flex items-center gap-2">
                             <button type="button" data-cart-minus="${product.id}" class="w-8 h-8 rounded-lg border border-neutral-700 text-neutral-400 hover:text-white">−</button>
-                            <input data-cart-input="${product.id}" type="number" min="0" max="9999" value="${quantity}" class="w-16 rounded-lg border border-neutral-700 bg-black px-2 py-2 text-center text-sm font-bold outline-none focus:border-amber-500">
+                            <input data-cart-input="${product.id}" type="number" min="0" max="99" value="${quantity}" aria-label="Cantidad de contenedores" class="w-16 rounded-lg border border-neutral-700 bg-black px-2 py-2 text-center text-sm font-bold outline-none focus:border-amber-500">
                             <button type="button" data-cart-plus="${product.id}" class="w-8 h-8 rounded-lg bg-amber-500 text-black hover:bg-amber-400">+</button>
                         </div>
                     </div>`).join('');
 
                 cartItems.querySelectorAll('[data-cart-minus]').forEach(button => button.addEventListener('click', () => {
                     const product = CATALOG.find(item => item.id === button.dataset.cartMinus);
-                    changeQuantity(button.dataset.cartMinus, -product.step);
+                    changeQuantity(button.dataset.cartMinus, -1);
                 }));
                 cartItems.querySelectorAll('[data-cart-plus]').forEach(button => button.addEventListener('click', () => {
                     const product = CATALOG.find(item => item.id === button.dataset.cartPlus);
-                    changeQuantity(button.dataset.cartPlus, product.step);
+                    changeQuantity(button.dataset.cartPlus, 1);
                 }));
                 cartItems.querySelectorAll('[data-cart-input]').forEach(input => input.addEventListener('change', () => changeQuantity(input.dataset.cartInput, 0, Math.max(0, parseInt(input.value) || 0))));
             }
@@ -1150,17 +1119,6 @@
                 renderProducts();
                 renderCart();
                 lucide.createIcons();
-            }
-
-            function applyTemplate(name) {
-                const templates = {
-                    panels: {'trina-vertex-720': 594},
-                    industrial: {'longi-x10-670': 216, 'deye-50k-hv': 12, 'eco-dpu': 8},
-                    retail: {'trina-vertexs-455': 180, 'deye-6k-lv': 32, 'eco-river2pro': 24, 'eco-delta2max': 12}
-                };
-                state.cart = {...templates[name]};
-                saveCart();
-                renderAll();
             }
 
             function requestCode() {
@@ -1181,22 +1139,21 @@
                 const destination = $('request-destination').value.trim() || 'No indicado';
                 const notes = $('request-notes').value.trim() || 'Sin observaciones';
                 const regulated = entries.some(entry => entry.product.regulated);
-                const lines = entries.map(({product, quantity}) => `• ${product.brand} ${product.model}: ${quantity} uds. (${(quantity / product.step).toLocaleString('es-ES', {maximumFractionDigits:1})} pallets de referencia)`);
+                const lines = entries.map(({product, quantity}) => `• ${product.brand} ${product.model}: ${quantity} ${quantity === 1 ? 'contenedor completo' : 'contenedores completos'} de 40’ HC`);
                 return [
                     `SOLICITUD DE COTIZACIÓN ${requestCode()}`,
                     '',
                     `Cliente/empresa: ${name}`,
                     `Destino: ${destination}`,
-                    'Formato: Contenedor 40’ HC',
-                    `Ocupación preliminar: ${Math.round(capacity())} %`,
+                    'Formato: carga completa de una sola referencia y fábrica',
                     '',
-                    'PRODUCTOS SELECCIONADOS',
+                    'PRODUCTO SELECCIONADO',
                     ...lines,
                     '',
                     `Mercancía con litio: ${regulated ? 'Sí — requiere validación' : 'No identificada'}`,
                     `Observaciones: ${notes}`,
                     '',
-                    'Solicito validar disponibilidad, compatibilidad, embalaje, capacidad real, origen y precio en USDT.'
+                    'Solicito confirmar unidades por contenedor, paletización, disponibilidad, origen, plazo y precio en USDT.'
                 ].join('\n');
             }
 
@@ -1219,13 +1176,12 @@
                 renderAll();
             });
             $('reset-container').addEventListener('click', () => {
-                if (!cartEntries().length || window.confirm('¿Vaciar todos los productos del contenedor?')) {
+                if (!cartEntries().length || window.confirm('¿Eliminar el producto seleccionado de la solicitud?')) {
                     state.cart = {};
                     saveCart();
                     renderAll();
                 }
             });
-            document.querySelectorAll('.template-btn').forEach(button => button.addEventListener('click', () => applyTemplate(button.dataset.template)));
             $('send-proposal').addEventListener('click', () => {
                 if (!cartEntries().length) return;
                 window.open(`https://wa.me/15613122929?text=${encodeURIComponent(proposalText())}`, '_blank', 'noopener,noreferrer');
