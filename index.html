@@ -90,6 +90,26 @@
             max-width: 92%;
             max-height: 110px;
         }
+        .equipment-media {
+            min-height: 250px;
+            background:
+                radial-gradient(circle at 75% 15%, rgba(245, 158, 11, 0.12), transparent 36%),
+                linear-gradient(145deg, #f8fafc 0%, #e5e7eb 100%);
+        }
+        .equipment-media img {
+            width: 100%;
+            height: 100%;
+            min-height: 250px;
+            object-fit: contain;
+            transition: transform 0.45s ease;
+        }
+        .equipment-card:hover .equipment-media img {
+            transform: scale(1.035);
+        }
+        .spec-chip {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.045);
+        }
     </style>
 </head>
 <body class="text-white min-h-screen overflow-x-hidden selection:bg-neutral-800 selection:text-white">
@@ -292,6 +312,182 @@
                         </p>
                     </div>
                     <div class="text-xs font-semibold text-neutral-500 tracking-wider uppercase pt-4 border-t border-neutral-800/60">Garantía y Especificación</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catálogo orientativo de equipos y configuraciones de contenedor -->
+        <section class="space-y-12" aria-labelledby="equipment-title">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 items-end">
+                <div class="lg:col-span-8 space-y-4">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] text-amber-500 uppercase">
+                        <i data-lucide="boxes" class="w-4 h-4"></i>
+                        Catálogo de referencia
+                    </div>
+                    <h2 id="equipment-title" class="text-3xl md:text-5xl font-black tracking-tight">Equipos que puedes solicitar</h2>
+                    <p class="text-neutral-400 text-base md:text-lg leading-relaxed max-w-3xl">
+                        Seleccionamos paneles, inversores y almacenamiento de fabricantes reconocidos. Podemos cotizar un solo modelo, una solución completa o una carga mixta.
+                    </p>
+                </div>
+                <div class="lg:col-span-4">
+                    <a href="https://wa.me/15613122929?text=Hola%2C%20quiero%20consultar%20disponibilidad%20y%20precio%20de%20equipos%20fotovoltaicos." target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-5 py-4 text-sm font-bold text-amber-400 transition hover:bg-amber-500 hover:text-black">
+                        <i data-lucide="message-square" class="w-5 h-5"></i>
+                        Consultar precio y disponibilidad
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <article class="equipment-card overflow-hidden rounded-3xl border border-neutral-800 bg-[#111112] transition hover:-translate-y-1 hover:border-red-500/40">
+                    <div class="equipment-media overflow-hidden p-6 md:p-8">
+                        <img src="https://static.longi.com/Himox10_20241010_kv_e71575c775.jpg" alt="Módulo solar LONGi Hi-MO X10" loading="lazy">
+                    </div>
+                    <div class="p-7 md:p-8 space-y-5">
+                        <div>
+                            <span class="text-[10px] font-bold tracking-[0.2em] text-red-400 uppercase">LONGi</span>
+                            <h3 class="text-2xl font-black mt-1">Hi-MO X10</h3>
+                            <p class="text-sm text-neutral-400 mt-2">Módulo de alta potencia para proyectos comerciales, industriales y plantas solares.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">Hasta 670 W</span>
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">24,8 % eficiencia</span>
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">Tecnología HPBC 2.0</span>
+                        </div>
+                        <a href="https://www.longi.com/en/products/modules-series/hi-mo-x10/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-300 hover:text-amber-500">
+                            Ver ficha del fabricante <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="equipment-card overflow-hidden rounded-3xl border border-neutral-800 bg-[#111112] transition hover:-translate-y-1 hover:border-sky-500/40">
+                    <div class="equipment-media overflow-hidden p-6 md:p-8">
+                        <img src="https://www-cdn.trinasolar.com/wwwstorage/sites/17/us-Trinasolar%20Vertex%20N%20Modules-m2-1-2.jpg" alt="Módulos solares Trina Solar Vertex N" loading="lazy">
+                    </div>
+                    <div class="p-7 md:p-8 space-y-5">
+                        <div>
+                            <span class="text-[10px] font-bold tracking-[0.2em] text-sky-400 uppercase">Trina Solar</span>
+                            <h3 class="text-2xl font-black mt-1">Vertex N</h3>
+                            <p class="text-sm text-neutral-400 mt-2">Panel bifacial de doble vidrio para generación a gran escala y cubiertas industriales.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">Hasta 720 W</span>
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">N-type TOPCon</span>
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">Bifacial dual glass</span>
+                        </div>
+                        <a href="https://www.trinasolar.com/us/vertex-n-series/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-300 hover:text-amber-500">
+                            Ver ficha del fabricante <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="equipment-card overflow-hidden rounded-3xl border border-neutral-800 bg-[#111112] transition hover:-translate-y-1 hover:border-blue-500/40">
+                    <div class="equipment-media overflow-hidden p-6 md:p-8">
+                        <img src="https://www.deyeinverter.com/deyeinverter/2025/05/30/15.png" alt="Inversor híbrido trifásico Deye de 50 kW" loading="lazy">
+                    </div>
+                    <div class="p-7 md:p-8 space-y-5">
+                        <div>
+                            <span class="text-[10px] font-bold tracking-[0.2em] text-blue-400 uppercase">Deye</span>
+                            <h3 class="text-2xl font-black mt-1">Híbrido trifásico 50 kW</h3>
+                            <p class="text-sm text-neutral-400 mt-2">Inversor de alto voltaje para comercios, industria, respaldo y microrredes.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">SUN-50K-SG01HP3</span>
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">4 MPPT</span>
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">Hasta 10 en paralelo</span>
+                        </div>
+                        <a href="https://www.deyeinverter.com/product/three-phase-high-voltage-hybrid-inverter/sun29-9-30-35-40-50ksg01hp3eubm3-4-29-950kw-three-phase-2-3-4-mppt-hybrid-inverter-hv-battery-supported-339.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-300 hover:text-amber-500">
+                            Ver ficha del fabricante <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="equipment-card overflow-hidden rounded-3xl border border-neutral-800 bg-[#111112] transition hover:-translate-y-1 hover:border-neutral-500">
+                    <div class="equipment-media overflow-hidden p-6 md:p-8">
+                        <img src="https://us.ecoflow.com/cdn/shop/files/ecoflow-ecoflow-delta-pro-ultra-whole-home-backup-power-ul-9540-certificated-dpu-bundle-delta-pro-ultra-1-x-inverter-1-x-battery-1249296412.webp?v=1784197599&amp;width=1240" alt="Sistema de almacenamiento EcoFlow DELTA Pro Ultra" loading="lazy">
+                    </div>
+                    <div class="p-7 md:p-8 space-y-5">
+                        <div>
+                            <span class="text-[10px] font-bold tracking-[0.2em] text-neutral-300 uppercase">EcoFlow</span>
+                            <h3 class="text-2xl font-black mt-1">DELTA Pro Ultra</h3>
+                            <p class="text-sm text-neutral-400 mt-2">Almacenamiento modular y respaldo para viviendas, comercios y soluciones autónomas.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">6,1 kWh por batería</span>
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">7,2 kW de salida</span>
+                            <span class="spec-chip rounded-full px-3 py-1.5 text-xs font-semibold">Escalable hasta 90 kWh</span>
+                        </div>
+                        <a href="https://us.ecoflow.com/collections/delta-pro-series/products/delta-pro-ultra" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-neutral-300 hover:text-amber-500">
+                            Ver ficha del fabricante <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="space-y-6 pt-4" aria-labelledby="container-examples-title">
+                <div class="max-w-3xl space-y-3">
+                    <span class="text-xs font-bold tracking-[0.18em] text-amber-500 uppercase">Ideas de importación</span>
+                    <h3 id="container-examples-title" class="text-3xl md:text-4xl font-black tracking-tight">Ejemplos de contenedores</h3>
+                    <p class="text-neutral-400">Configuramos la carga según el tipo de cliente, el proyecto y el destino.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                    <article class="rounded-3xl border border-amber-500/25 bg-gradient-to-br from-amber-500/10 to-[#111112] p-7 space-y-5">
+                        <div class="w-11 h-11 rounded-2xl bg-amber-500 text-black flex items-center justify-center">
+                            <i data-lucide="container" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold tracking-[0.18em] text-amber-500 uppercase">Contenedor completo</span>
+                            <h4 class="text-xl font-black mt-1">Solo paneles solares</h4>
+                        </div>
+                        <p class="text-sm text-neutral-300 leading-relaxed">
+                            Referencia de embalaje para Vertex N de 700 W: hasta 594 módulos en un 40’ HC, equivalentes a aproximadamente 415,8 kWp.
+                        </p>
+                        <ul class="space-y-2 text-sm text-neutral-400">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>Ideal para distribuidores y proyectos de gran escala</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>Un modelo o combinación de potencias</li>
+                        </ul>
+                    </article>
+
+                    <article class="rounded-3xl border border-neutral-800 bg-[#111112] p-7 space-y-5">
+                        <div class="w-11 h-11 rounded-2xl bg-neutral-800 text-amber-500 flex items-center justify-center">
+                            <i data-lucide="factory" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold tracking-[0.18em] text-neutral-500 uppercase">Carga comercial e industrial</span>
+                            <h4 class="text-xl font-black mt-1">Potencia + almacenamiento</h4>
+                        </div>
+                        <p class="text-sm text-neutral-300 leading-relaxed">
+                            Inversores híbridos trifásicos de 25–50 kW, bancos de baterías HV compatibles, monitoreo, protecciones y accesorios.
+                        </p>
+                        <ul class="space-y-2 text-sm text-neutral-400">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>Deye, Felicity Solar y soluciones equivalentes</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>Dimensionado según potencia y autonomía</li>
+                        </ul>
+                    </article>
+
+                    <article class="rounded-3xl border border-neutral-800 bg-[#111112] p-7 space-y-5">
+                        <div class="w-11 h-11 rounded-2xl bg-neutral-800 text-amber-500 flex items-center justify-center">
+                            <i data-lucide="combine" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold tracking-[0.18em] text-neutral-500 uppercase">Contenedor mixto</span>
+                            <h4 class="text-xl font-black mt-1">Soluciones listas para vender</h4>
+                        </div>
+                        <p class="text-sm text-neutral-300 leading-relaxed">
+                            Paneles, inversores de distintas potencias, baterías de litio, EcoFlow, cableado, protecciones y repuestos en una misma operación.
+                        </p>
+                        <ul class="space-y-2 text-sm text-neutral-400">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>Catálogo variado para reventa e instalación</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>Mezcla ajustada a presupuesto y mercado</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="rounded-2xl border border-neutral-800 bg-neutral-950 px-5 py-4 flex items-start gap-3 text-xs text-neutral-500 leading-relaxed">
+                    <i data-lucide="info" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+                    <p>
+                        Las configuraciones son orientativas. La cantidad final depende del modelo, dimensiones, paletización, peso, origen, destino y aceptación de la naviera. Los equipos con baterías de litio requieren revisión específica de transporte y documentación.
+                    </p>
                 </div>
             </div>
         </section>
