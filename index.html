@@ -144,6 +144,30 @@
                 height: 250px;
             }
         }
+        .configurator-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #3f3f46 #111112;
+        }
+        .catalog-card {
+            background: linear-gradient(145deg, #19191b 0%, #101011 100%);
+        }
+        .catalog-logo {
+            width: 100%;
+            height: 74px;
+            object-fit: contain;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 14px;
+        }
+        .capacity-bar {
+            background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 65%, #ef4444 100%);
+        }
+        .cart-pulse {
+            animation: cartPulse 0.35s ease;
+        }
+        @keyframes cartPulse {
+            50% { transform: scale(1.025); }
+        }
     </style>
 </head>
 <body class="text-white min-h-screen overflow-x-hidden selection:bg-neutral-800 selection:text-white">
@@ -607,43 +631,119 @@
             </p>
         </section>
 
-        <!-- Calculadora de Viabilidad Técnica (Apple Configurator UI Style) -->
-        <section class="bg-[#1c1c1e] rounded-3xl p-8 md:p-12 border border-neutral-800">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-5 space-y-4">
-                    <div class="text-neutral-400">
-                        <i data-lucide="calculator" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold tracking-tight">Cálculo de viabilidad.</h3>
-                    <p class="text-neutral-400 text-sm leading-relaxed">
-                        Desliza para introducir el consumo eléctrico mensual y visualizar una estimación del dimensionamiento aproximado, el número de paneles y el espacio requerido para la instalación.
-                    </p>
-                </div>
-                
-                <div class="lg:col-span-7 bg-black/40 p-8 rounded-2xl border border-neutral-800 space-y-8">
-                    <div>
-                        <div class="flex justify-between text-sm mb-3">
-                            <span class="text-neutral-400 font-medium">Consumo Mensual Estimado</span>
-                            <span class="font-bold text-white text-lg" id="consumption-display">1,200 kWh</span>
+        <!-- Configurador comercial de contenedor -->
+        <section id="configurador" class="space-y-9" aria-labelledby="configurator-title">
+            <div class="rounded-3xl border border-amber-500/25 bg-gradient-to-br from-amber-500/12 via-[#15120d] to-[#080808] p-8 md:p-12">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+                    <div class="lg:col-span-8 space-y-4">
+                        <div class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] text-amber-500 uppercase">
+                            <i data-lucide="container" class="w-4 h-4"></i>
+                            Configurador 40’ HC
                         </div>
-                        <input type="range" id="consumption-input" min="200" max="10000" step="200" value="1200" class="w-full h-1 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-white">
+                        <h2 id="configurator-title" class="text-3xl md:text-5xl font-black tracking-tight">Construye tu contenedor.</h2>
+                        <p class="text-neutral-300 text-base md:text-lg leading-relaxed max-w-3xl">
+                            Explora el catálogo, selecciona cantidades y envía una propuesta detallada por WhatsApp. Nosotros validaremos embalaje, compatibilidad, disponibilidad y transporte.
+                        </p>
+                    </div>
+                    <div class="lg:col-span-4 grid grid-cols-2 gap-3">
+                        <div class="rounded-2xl border border-neutral-800 bg-black/35 p-4">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-500">Referencias</span>
+                            <strong id="catalog-count" class="block text-2xl mt-1">26</strong>
+                        </div>
+                        <div class="rounded-2xl border border-neutral-800 bg-black/35 p-4">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-500">Categorías</span>
+                            <strong class="block text-2xl mt-1">4</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-7 items-start">
+                <div class="xl:col-span-8 space-y-6">
+                    <div class="rounded-2xl border border-neutral-800 bg-[#111112] p-4 md:p-5 space-y-4">
+                        <div class="flex flex-col md:flex-row gap-3">
+                            <label class="relative flex-1">
+                                <span class="sr-only">Buscar productos</span>
+                                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500"></i>
+                                <input id="catalog-search" type="search" placeholder="Buscar marca, modelo o característica…" class="w-full rounded-xl border border-neutral-800 bg-black py-3 pl-11 pr-4 text-sm text-white outline-none transition focus:border-amber-500">
+                            </label>
+                            <select id="brand-filter" aria-label="Filtrar por marca" class="rounded-xl border border-neutral-800 bg-black px-4 py-3 text-sm text-neutral-300 outline-none focus:border-amber-500">
+                                <option value="all">Todas las marcas</option>
+                            </select>
+                        </div>
+                        <div id="category-filters" class="flex gap-2 overflow-x-auto pb-1 configurator-scroll" aria-label="Categorías de productos"></div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-neutral-800">
+                    <div class="flex items-center justify-between gap-4">
                         <div>
-                            <span class="text-xs text-neutral-500 block uppercase tracking-wider mb-1">Módulos (550W)</span>
-                            <span class="text-2xl font-semibold text-white" id="panel-display">16</span>
+                            <p class="text-sm font-semibold text-white" id="results-label">Catálogo completo</p>
+                            <p class="text-xs text-neutral-500 mt-1">Los botones +/− agregan o quitan un pallet de referencia. Disponibilidad y embalaje exactos sujetos a cotización.</p>
                         </div>
-                        <div>
-                            <span class="text-xs text-neutral-500 block uppercase tracking-wider mb-1">Área de Cubierta</span>
-                            <span class="text-2xl font-semibold text-white" id="area-display">42 m²</span>
+                        <button id="clear-filters" type="button" class="text-xs font-semibold text-neutral-500 hover:text-white">Limpiar filtros</button>
+                    </div>
+
+                    <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5" aria-live="polite"></div>
+                </div>
+
+                <aside id="container-cart" class="order-first xl:order-none xl:col-span-4 xl:sticky xl:top-28 rounded-3xl border border-neutral-800 bg-[#111112] overflow-hidden" aria-labelledby="cart-title">
+                    <div class="p-6 border-b border-neutral-800 bg-gradient-to-br from-amber-500/10 to-transparent">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-500">Propuesta actual</span>
+                                <h3 id="cart-title" class="text-2xl font-black mt-1">Contenedor 40’ HC</h3>
+                            </div>
+                            <button id="reset-container" type="button" class="text-xs font-semibold text-neutral-500 hover:text-red-400">Vaciar</button>
                         </div>
-                        <div>
-                            <span class="text-xs text-neutral-500 block uppercase tracking-wider mb-1">Potencia Inversor</span>
-                            <span class="text-2xl font-semibold text-white" id="power-display">8.8 kW</span>
+
+                        <div class="mt-6">
+                            <div class="flex justify-between items-end mb-2">
+                                <div>
+                                    <span class="text-xs text-neutral-500">Ocupación estimada</span>
+                                    <strong id="capacity-percent" class="block text-3xl font-black text-white">0 %</strong>
+                                </div>
+                                <span id="capacity-status" class="rounded-full border border-neutral-700 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-neutral-400">Vacío</span>
+                            </div>
+                            <div class="h-3 overflow-hidden rounded-full bg-black border border-neutral-800">
+                                <div id="capacity-fill" class="capacity-bar h-full rounded-full transition-all duration-500" style="width:0%"></div>
+                            </div>
+                            <p class="text-[11px] text-neutral-500 leading-relaxed mt-3">Estimación volumétrica inicial. La carga definitiva requiere validación de pallets, peso y mercancía regulada.</p>
                         </div>
                     </div>
-                </div>
+
+                    <div class="p-5 border-b border-neutral-800">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-500">Comenzar con una plantilla</span>
+                        <div class="grid grid-cols-1 gap-2 mt-3">
+                            <button type="button" data-template="panels" class="template-btn rounded-xl border border-neutral-800 bg-black/40 px-4 py-3 text-left text-sm font-semibold hover:border-amber-500/50">Contenedor de paneles</button>
+                            <button type="button" data-template="industrial" class="template-btn rounded-xl border border-neutral-800 bg-black/40 px-4 py-3 text-left text-sm font-semibold hover:border-amber-500/50">Proyecto comercial + baterías</button>
+                            <button type="button" data-template="retail" class="template-btn rounded-xl border border-neutral-800 bg-black/40 px-4 py-3 text-left text-sm font-semibold hover:border-amber-500/50">Carga mixta para distribución</button>
+                        </div>
+                    </div>
+
+                    <div id="cart-items" class="max-h-[390px] overflow-y-auto configurator-scroll divide-y divide-neutral-800"></div>
+                    <div id="empty-cart" class="p-8 text-center">
+                        <div class="w-12 h-12 mx-auto rounded-2xl bg-neutral-900 flex items-center justify-center text-neutral-600">
+                            <i data-lucide="package-plus" class="w-6 h-6"></i>
+                        </div>
+                        <p class="font-semibold mt-4">Tu contenedor está vacío</p>
+                        <p class="text-xs text-neutral-500 mt-2">Añade productos o utiliza una plantilla.</p>
+                    </div>
+
+                    <div class="p-5 border-t border-neutral-800 space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-3">
+                            <input id="request-name" type="text" autocomplete="name" placeholder="Nombre o empresa" class="rounded-xl border border-neutral-800 bg-black px-4 py-3 text-sm outline-none focus:border-amber-500">
+                            <input id="request-destination" type="text" placeholder="País o puerto de destino" class="rounded-xl border border-neutral-800 bg-black px-4 py-3 text-sm outline-none focus:border-amber-500">
+                        </div>
+                        <textarea id="request-notes" rows="2" placeholder="Observaciones, voltaje requerido, origen preferido…" class="w-full resize-none rounded-xl border border-neutral-800 bg-black px-4 py-3 text-sm outline-none focus:border-amber-500"></textarea>
+                        <button id="send-proposal" type="button" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 px-5 py-4 text-sm font-black text-black transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-40">
+                            <i data-lucide="message-square" class="w-5 h-5"></i>
+                            Enviar propuesta por WhatsApp
+                        </button>
+                        <button id="copy-proposal" type="button" class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-neutral-700 px-5 py-3 text-xs font-bold text-neutral-300 hover:border-neutral-500 hover:text-white">
+                            <i data-lucide="copy" class="w-4 h-4"></i>
+                            Copiar resumen
+                        </button>
+                    </div>
+                </aside>
             </div>
         </section>
 
@@ -700,34 +800,462 @@
 
     <!-- Scripts de Interacción -->
     <script>
-        lucide.createIcons();
+        const PRODUCTS = [
+            {id:'longi-x10-670', category:'panels', brand:'LONGi', model:'Hi-MO X10 Scientist', specs:['Hasta 670 W','24,8 % eficiencia','HPBC 2.0'], pack:'Pallet de referencia: 36 módulos', fill:0.1684, step:36, image:'assets/products/longi-x10-original.jpg', visual:'photo'},
+            {id:'longi-x10-560', category:'panels', brand:'LONGi', model:'Hi-MO X10 Light Design', specs:['535–560 W','7,2 kg/m²','HPBC 2.0'], pack:'Pallet de referencia: 36 módulos', fill:0.155, step:36, image:'assets/products/longi-x10-original.jpg', visual:'photo'},
+            {id:'longi-himo7-620', category:'panels', brand:'LONGi', model:'Hi-MO 7 LR7', specs:['585–620 W','Bifacial','N-type HPDC'], pack:'Pallet de referencia: 36 módulos', fill:0.1684, step:36, image:'assets/products/longi-x10-original.jpg', visual:'photo'},
+            {id:'trina-vertex-720', category:'panels', brand:'Trina Solar', model:'Vertex N 720 W', specs:['Hasta 720 W','N-type TOPCon','Bifacial dual glass'], pack:'Pallet de referencia: 33 módulos', fill:0.1684, step:33, image:'assets/products/trina-vertex-n-original.jpg', visual:'photo'},
+            {id:'trina-vertex-625', category:'panels', brand:'Trina Solar', model:'Vertex N 625 W', specs:['Hasta 625 W','N-type TOPCon','Alta bifacialidad'], pack:'Pallet de referencia: 36 módulos', fill:0.165, step:36, image:'assets/products/trina-vertex-n-original.jpg', visual:'photo'},
+            {id:'trina-vertexs-455', category:'panels', brand:'Trina Solar', model:'Vertex S+ NEG9R.28', specs:['430–455 W','N-type i-TOPCon','Doble vidrio'], pack:'Pallet de referencia: 36 módulos', fill:0.145, step:36, image:'assets/products/trina-vertex-n-original.jpg', visual:'photo'},
 
-        // Lógica de cálculo estimativo fotovoltaico
-        (function initCalc() {
-            const consumptionInput = document.getElementById('consumption-input');
-            const consumptionDisplay = document.getElementById('consumption-display');
-            const panelDisplay = document.getElementById('panel-display');
-            const areaDisplay = document.getElementById('area-display');
-            const powerDisplay = document.getElementById('power-display');
+            {id:'deye-6k-lv', category:'inverters', brand:'Deye', model:'SUN-6K-SG01LP1', specs:['6 kW','Monofásico','Batería 48 V'], pack:'Pallet estimado: 16 unidades', fill:0.22, step:16, image:'assets/products/deye-50kw-premium.png', visual:'cutout'},
+            {id:'deye-12k-lv', category:'inverters', brand:'Deye', model:'SUN-12K-SG02LP1', specs:['12 kW','Monofásico split phase','Batería LV'], pack:'Pallet estimado: 12 unidades', fill:0.3, step:12, image:'assets/products/deye-50kw-premium.png', visual:'cutout'},
+            {id:'deye-20k-3p', category:'inverters', brand:'Deye', model:'SUN-20K-SG05LP3', specs:['20 kW','Trifásico','Híbrido LV'], pack:'Pallet estimado: 8 unidades', fill:0.44, step:8, image:'assets/products/deye-50kw-premium.png', visual:'cutout'},
+            {id:'deye-50k-hv', category:'inverters', brand:'Deye', model:'SUN-50K-SG01HP3', specs:['50 kW','Trifásico HV','4 MPPT'], pack:'Pallet estimado: 6 unidades', fill:0.72, step:6, image:'assets/products/deye-50kw-premium.png', visual:'cutout'},
+            {id:'felicity-6k', category:'inverters', brand:'Felicity Solar', model:'IVEM 6 kW', specs:['6 kW','Híbrido','Aplicación residencial'], pack:'Pallet estimado: 16 unidades', fill:0.25, step:16, image:'assets/brands/felicity-logo-new.png', visual:'brand'},
+            {id:'felicity-10k', category:'inverters', brand:'Felicity Solar', model:'IVGM 10 kW', specs:['10 kW','Híbrido','Gestión solar + batería'], pack:'Pallet estimado: 12 unidades', fill:0.33, step:12, image:'assets/brands/felicity-logo-new.png', visual:'brand'},
+            {id:'felicity-50k', category:'inverters', brand:'Felicity Solar', model:'IVGM50KHP3G2', specs:['50 kW','Trifásico HV','IP65'], pack:'Pallet estimado: 6 unidades', fill:0.7, step:6, image:'assets/brands/felicity-logo-new.png', visual:'brand'},
+            {id:'must-6k', category:'inverters', brand:'MUST', model:'PV1800 LV2 6.2 kW', specs:['6,2 kW','Off-grid','MPPT integrado'], pack:'Pallet estimado: 16 unidades', fill:0.25, step:16, image:'assets/brands/must.svg', visual:'brand'},
+            {id:'must-12k', category:'inverters', brand:'MUST', model:'Híbrido 12 kW', specs:['12 kW','Alta potencia','Aplicación residencial/comercial'], pack:'Pallet estimado: 12 unidades', fill:0.36, step:12, image:'assets/brands/must.svg', visual:'brand'},
 
-            if (!consumptionInput) return;
+            {id:'deye-rwf10', category:'batteries', brand:'Deye', model:'RW-F10.6', specs:['10,64 kWh','LiFePO₄','Montaje en pared'], pack:'Pallet estimado: 8 unidades · litio', fill:0.58, step:8, image:'assets/products/deye-50kw-premium.png', visual:'cutout', regulated:true},
+            {id:'deye-bosg', category:'batteries', brand:'Deye', model:'BOS-G HV Module', specs:['5,12 kWh/módulo','Alta tensión','Sistema modular'], pack:'Pallet estimado: 12 módulos · litio', fill:0.42, step:12, image:'assets/products/deye-50kw-premium.png', visual:'cutout', regulated:true},
+            {id:'felicity-lpba100', category:'batteries', brand:'Felicity Solar', model:'LPBA 48 V 100 Ah', specs:['5,12 kWh','LiFePO₄','48 V'], pack:'Pallet estimado: 12 unidades · litio', fill:0.4, step:12, image:'assets/brands/felicity-logo-new.png', visual:'brand', regulated:true},
+            {id:'felicity-lpba300', category:'batteries', brand:'Felicity Solar', model:'LPBA 48 V 300 Ah', specs:['15 kWh aprox.','LiFePO₄','Alta capacidad'], pack:'Pallet estimado: 4 unidades · litio', fill:0.82, step:4, image:'assets/brands/felicity-logo-new.png', visual:'brand', regulated:true},
+            {id:'must-lp1600', category:'batteries', brand:'MUST', model:'LP1600 51,2 V', specs:['5,12 kWh','LiFePO₄','Rack / pared'], pack:'Pallet estimado: 12 unidades · litio', fill:0.4, step:12, image:'assets/brands/must.svg', visual:'brand', regulated:true},
+            {id:'ecoflow-dpu-batt', category:'batteries', brand:'EcoFlow', model:'DELTA Pro Ultra Battery', specs:['6,144 Wh','Apilable','Sistema DPU'], pack:'Pallet estimado: 8 unidades · litio', fill:0.52, step:8, image:'assets/products/ecoflow-dpu-premium.png', visual:'cutout', regulated:true},
 
-            function update() {
-                const kwh = parseInt(consumptionInput.value);
-                consumptionDisplay.textContent = `${kwh.toLocaleString('es-ES')} kWh`;
+            {id:'eco-river2pro', category:'stations', brand:'EcoFlow', model:'RIVER 2 Pro', specs:['768 Wh','800 W','Portátil'], pack:'Pallet estimado: 24 unidades · litio', fill:0.22, step:24, image:'assets/products/ecoflow-dpu-premium.png', visual:'cutout', regulated:true},
+            {id:'eco-delta2max', category:'stations', brand:'EcoFlow', model:'DELTA 2 Max', specs:['2,048 Wh','2,400 W','Expandable'], pack:'Pallet estimado: 12 unidades · litio', fill:0.36, step:12, image:'assets/products/ecoflow-dpu-premium.png', visual:'cutout', regulated:true},
+            {id:'eco-deltapro', category:'stations', brand:'EcoFlow', model:'DELTA Pro', specs:['3,600 Wh','3,600 W','Expandable'], pack:'Pallet estimado: 8 unidades · litio', fill:0.55, step:8, image:'assets/products/ecoflow-dpu-premium.png', visual:'cutout', regulated:true},
+            {id:'eco-deltapro3', category:'stations', brand:'EcoFlow', model:'DELTA Pro 3', specs:['4,096 Wh','4,000 W','120/240 V'], pack:'Pallet estimado: 6 unidades · litio', fill:0.62, step:6, image:'assets/products/ecoflow-dpu-premium.png', visual:'cutout', regulated:true},
+            {id:'eco-dpu', category:'stations', brand:'EcoFlow', model:'DELTA Pro Ultra', specs:['6,144 Wh','7,200 W','Hasta 90 kWh'], pack:'Pallet estimado: 4 unidades · litio', fill:0.9, step:4, image:'assets/products/ecoflow-dpu-premium.png', visual:'cutout', regulated:true}
+        ];
 
-                const wattsReq = (kwh / 30) / 4.5 * 1000; 
-                const numPanels = Math.ceil(wattsReq / 550); 
-                const area = Math.ceil(numPanels * 2.6); 
-                const sysPower = ((numPanels * 550) / 1000).toFixed(1);
+        // Los datos verificados reemplazan la información resumida del catálogo.
+        const OFFICIAL_DATA = {
+            'longi-x10-670': {
+                model:'Hi-MO X10 LR7-72HVH',
+                specs:['Potencia: 630–650 W','Eficiencia: hasta 24,1 %','Voc: 53,5–53,9 V','Isc: 14,97–15,29 A','Dimensiones: 2382×1134×30 mm','Peso: 28,5 kg'],
+                pack:'36 módulos/pallet · 720 módulos/40’ HC',
+                step:36,
+                pdf:'assets/datasheets-original/longi-x10-670.pdf'
+            },
+            'longi-x10-560': {
+                model:'Hi-MO X10 LR7-60HVHL',
+                specs:['Potencia: 535–560 W','Eficiencia: hasta 24,8 %','Voc: 44,78–45,28 V','Isc: 15,15–15,65 A','Dimensiones: 1990×1134×30 mm','Peso: 16,3 kg'],
+                pack:'36 módulos/pallet · 792 módulos/40’ HC',
+                step:36,
+                pdf:'assets/datasheets-original/longi-x10-560.pdf'
+            },
+            'longi-himo7-620': {
+                model:'Hi-MO 7 LR7-72HGD',
+                specs:['Potencia: 585–620 W','Eficiencia: hasta 23,0 %','Voc: 52,01–52,75 V','Isc: 14,29–14,85 A','Dimensiones: 2382×1134×30 mm','Peso: 33,5 kg'],
+                pack:'36 módulos/pallet · 720 módulos/40’ HC',
+                step:36,
+                pdf:'assets/datasheets-original/longi-himo7-620.pdf'
+            },
+            'trina-vertex-720': {
+                model:'Vertex N TSM-NEG21C.20',
+                specs:['Potencia: 715–740 W','Eficiencia: hasta 23,8 %','Vmp: 41,10–42,10 V','Imp: 17,40–17,58 A','Dimensiones: 2384×1303×33 mm','Peso: 38,3 kg'],
+                pack:'33 módulos/pallet · 594 módulos/40’ HC',
+                step:33,
+                pdf:'assets/datasheets-original/trina-vertex-720.pdf'
+            },
+            'trina-vertexs-455': {
+                model:'Vertex S+ TSM-NEG9R.28',
+                specs:['Potencia: 430–455 W','Tecnología: N-type i-TOPCon','Módulo: doble vidrio','Tensión sistema: 1500 V DC','Aplicación: residencial/C&I','Garantía: según ficha oficial'],
+                pack:'36 módulos/pallet · confirmar carga 40’ HC',
+                step:36,
+                pdf:'assets/datasheets-original/trina-vertexs-455.pdf'
+            },
+            'deye-6k-lv': {
+                model:'SUN-6K-SG01LP1-US/EU',
+                specs:['Salida: 6 kW','Batería: 40–60 V DC','Tipo: híbrido monofásico','PV: doble MPPT','Protección: IP65','Aplicación: residencial'],
+                pack:'Pallet de fábrica: confirmar en cotización',
+                step:16,
+                pdf:'assets/datasheets-original/deye-6k-lv.pdf'
+            },
+            'deye-50k-hv': {
+                model:'SUN-50K-SG01HP3-EU-BM4',
+                specs:['Salida: 50 kW','Batería: 160–800 V','Carga/descarga: 100 A','Entrada PV máx.: 65 kW','MPPT: 4','Dimensiones/peso: ver ficha'],
+                pack:'Pallet de fábrica: confirmar · unidad aprox. 80 kg',
+                step:6,
+                pdf:'assets/datasheets-original/deye-50k-hv.pdf'
+            },
+            'ecoflow-dpu-batt': {
+                model:'DELTA Pro Ultra Battery',
+                specs:['Capacidad: 6144 Wh','Tensión: 102,4 V','Capacidad nominal: 60 Ah','Química: LFP','Dimensiones: 660×455×204 mm','Peso: 50,7 kg'],
+                pack:'Pallet de fábrica: confirmar · mercancía de litio',
+                step:8,
+                pdf:'assets/datasheets-original/eco-dpu.pdf'
+            },
+            'eco-river2pro': {
+                model:'RIVER 2 Pro',
+                specs:['Capacidad: 768 Wh','Salida AC: 800 W','Pico: 1600 W','Entrada solar: 220 W','Dimensiones: 270×260×226 mm','Peso: 7,8 kg'],
+                pack:'Pallet de fábrica: confirmar · mercancía de litio',
+                step:24,
+                pdf:'assets/datasheets-original/eco-river2pro.pdf'
+            },
+            'eco-delta2max': {
+                model:'DELTA 2 Max',
+                specs:['Capacidad: 2048 Wh','Salida AC: 2400 W','Pico: 4800 W','Entrada solar: 1000 W','Dimensiones: 497×242×305 mm','Peso: 23 kg'],
+                pack:'Pallet de fábrica: confirmar · mercancía de litio',
+                step:12,
+                pdf:'assets/datasheets-original/eco-delta2max.pdf'
+            },
+            'eco-dpu': {
+                model:'DELTA Pro Ultra',
+                specs:['Capacidad base: 6144 Wh','Salida AC: 7200 W','Solar máx.: 5600 W','Escalable: hasta 90 kWh','Inversor: 690×481×214 mm','Peso inversor: 32,1 kg'],
+                pack:'Pallet de fábrica: confirmar · mercancía de litio',
+                step:4,
+                pdf:'assets/datasheets-original/eco-dpu.pdf'
+            }
+        };
 
-                panelDisplay.textContent = `${numPanels} unidades`;
-                areaDisplay.textContent = `${area} m²`;
-                powerDisplay.textContent = `${sysPower} kW`;
+        // Especificaciones principales tomadas de los catálogos web de los fabricantes.
+        // Estas referencias se mantienen visibles aunque todavía no dispongamos del PDF original.
+        const WEB_DATA = {
+            'trina-vertex-625': {model:'Vertex N 625 W', specs:['Potencia: hasta 625 W','Tecnología: N-type i-TOPCon','Construcción: bifacial doble vidrio','Tensión sistema: 1500 V DC','Aplicación: grandes instalaciones','Garantía: según serie suministrada']},
+            'deye-12k-lv': {model:'SUN-12K-SG02LP1-EU', specs:['Salida nominal: 12 kW','Batería: 40–60 V DC','Tipo: híbrido monofásico','Entrada PV: hasta 18 kW','Seguimiento: 3 MPPT','Protección: IP65']},
+            'deye-20k-3p': {model:'SUN-20K-SG05LP3-EU', specs:['Salida nominal: 20 kW','Batería: baja tensión 40–60 V','Tipo: híbrido trifásico','Entrada PV: hasta 30 kW','Seguimiento: 3 MPPT','Protección: IP65']},
+            'felicity-6k': {model:'IVEM 6 kW', specs:['Salida nominal: 6 kW','Tipo: inversor híbrido','Batería: sistema de baja tensión','Control solar: MPPT integrado','Onda de salida: senoidal pura','Uso: residencial y respaldo']},
+            'felicity-10k': {model:'IVGM 10 kW', specs:['Salida nominal: 10 kW','Tipo: inversor híbrido','Gestión: solar + red + batería','Control solar: MPPT','Uso: residencial/comercial','Configuración eléctrica: confirmar']},
+            'felicity-50k': {model:'IVGM50KHP3G2', specs:['Salida nominal: 50 kW','Tipo: híbrido trifásico','Batería: alta tensión','Control solar: múltiples MPPT','Protección: IP65','Uso: comercial/industrial']},
+            'must-6k': {model:'PV1800 ECO 6.2 kW', specs:['Salida nominal: 6200 W','Tipo: off-grid alta frecuencia','Batería: 48 V DC','Entrada PV: hasta 500 V','Control solar: MPPT integrado','Salida: onda senoidal pura']},
+            'must-12k': {model:'Inversor híbrido 12 kW', specs:['Salida nominal: 12 kW','Tipo: híbrido de alta potencia','Gestión: solar + red + batería','Control solar: MPPT','Uso: residencial/comercial','Voltaje: según configuración']},
+            'deye-rwf10': {model:'RW-F10.6', specs:['Energía nominal: 10,64 kWh','Capacidad: 208 Ah','Tensión nominal: 51,2 V','Química: LiFePO₄','Profundidad descarga: hasta 90 %','Montaje: pared o suelo']},
+            'deye-bosg': {model:'BOS-G HV Module', specs:['Energía por módulo: 5,12 kWh','Tensión nominal: 51,2 V','Capacidad: 100 Ah','Química: LiFePO₄','Sistema: modular de alta tensión','Instalación: rack BOS-G']},
+            'felicity-lpba100': {model:'LPBA 48 V 100 Ah', specs:['Energía nominal: 5,12 kWh','Tensión nominal: 51,2 V','Capacidad: 100 Ah','Química: LiFePO₄','Comunicación: CAN/RS485','Montaje: pared o suelo']},
+            'felicity-lpba300': {model:'LPBA 48 V 300 Ah', specs:['Energía nominal: 15,36 kWh','Tensión nominal: 51,2 V','Capacidad: 300 Ah','Química: LiFePO₄','BMS: integrado','Uso: almacenamiento residencial']},
+            'must-lp1600': {model:'LP1600 51,2 V', specs:['Energía nominal: 5,12 kWh','Tensión nominal: 51,2 V','Capacidad: 100 Ah','Química: LiFePO₄','Comunicación: CAN/RS485','Montaje: rack o pared']},
+            'eco-deltapro': {model:'DELTA Pro', specs:['Capacidad: 3600 Wh','Salida AC: 3600 W','Pico: 7200 W','Entrada solar: hasta 1600 W','Dimensiones: 635×285×416 mm','Peso: aprox. 45 kg']},
+            'eco-deltapro3': {model:'DELTA Pro 3', specs:['Capacidad: 4096 Wh','Salida AC: 4000 W','Pico: 8000 W','Entrada solar: hasta 2600 W','Dimensiones: 693×341×410 mm','Peso: 51,5 kg']}
+        };
+
+        const CATALOG = PRODUCTS.map(product => ({
+            ...product,
+            ...(WEB_DATA[product.id] || {}),
+            ...(OFFICIAL_DATA[product.id] || {})
+        }));
+
+        const CATEGORIES = [
+            {id:'all', label:'Todos', icon:'layout-grid'},
+            {id:'panels', label:'Paneles', icon:'sun'},
+            {id:'inverters', label:'Inversores', icon:'zap'},
+            {id:'batteries', label:'Baterías', icon:'battery-charging'},
+            {id:'stations', label:'Estaciones de energía', icon:'power'}
+        ];
+
+        (function initContainerConfigurator() {
+            const grid = document.getElementById('product-grid');
+            if (!grid) {
+                lucide.createIcons();
+                return;
             }
 
-            consumptionInput.addEventListener('input', update);
-            update();
+            function loadSavedCart() {
+                try {
+                    const saved = JSON.parse(localStorage.getItem('wexmor-container-v1') || '{}');
+                    return saved && typeof saved === 'object' && !Array.isArray(saved) ? saved : {};
+                } catch {
+                    return {};
+                }
+            }
+
+            const state = {
+                category: 'all',
+                brand: 'all',
+                search: '',
+                cart: loadSavedCart()
+            };
+            const $ = (id) => document.getElementById(id);
+            const categoryFilters = $('category-filters');
+            const brandFilter = $('brand-filter');
+            const searchInput = $('catalog-search');
+            const cartItems = $('cart-items');
+            const emptyCart = $('empty-cart');
+            const cartPanel = $('container-cart');
+
+            $('catalog-count').textContent = CATALOG.length;
+
+            CATEGORIES.forEach(category => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.dataset.category = category.id;
+                button.className = 'category-btn shrink-0 inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-bold transition';
+                button.innerHTML = `<i data-lucide="${category.icon}" class="w-4 h-4"></i>${category.label}`;
+                button.addEventListener('click', () => {
+                    state.category = category.id;
+                    renderAll();
+                });
+                categoryFilters.appendChild(button);
+            });
+
+            [...new Set(CATALOG.map(product => product.brand))].sort().forEach(brand => {
+                const option = document.createElement('option');
+                option.value = brand;
+                option.textContent = brand;
+                brandFilter.appendChild(option);
+            });
+
+            function filteredProducts() {
+                const term = state.search.trim().toLowerCase();
+                return CATALOG.filter(product => {
+                    const matchesCategory = state.category === 'all' || product.category === state.category;
+                    const matchesBrand = state.brand === 'all' || product.brand === state.brand;
+                    const haystack = `${product.brand} ${product.model} ${product.specs.join(' ')}`.toLowerCase();
+                    return matchesCategory && matchesBrand && (!term || haystack.includes(term));
+                });
+            }
+
+            function productVisual(product) {
+                const classes = product.visual === 'photo'
+                    ? 'h-32 w-full object-cover'
+                    : product.visual === 'cutout'
+                        ? 'h-32 w-full object-contain p-3'
+                        : 'h-32 w-full object-contain p-7';
+                return `<div class="overflow-hidden rounded-2xl bg-gradient-to-br from-neutral-800 to-black border border-neutral-800"><img src="${product.image}" alt="${product.brand} ${product.model}" loading="lazy" class="${classes}"></div>`;
+            }
+
+            function renderProducts() {
+                const products = filteredProducts();
+                $('results-label').textContent = `${products.length} ${products.length === 1 ? 'producto' : 'productos'}`;
+                grid.innerHTML = products.map(product => {
+                    const quantity = state.cart[product.id] || 0;
+                    return `
+                        <article class="catalog-card rounded-3xl border ${quantity ? 'border-amber-500/45' : 'border-neutral-800'} p-5 space-y-4 transition hover:-translate-y-0.5 hover:border-neutral-600">
+                            ${productVisual(product)}
+                            <div class="flex items-start justify-between gap-3">
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-amber-500">${product.brand}</span>
+                                    <h3 class="text-lg font-black mt-1">${product.model}</h3>
+                                </div>
+                                ${product.regulated ? '<span title="Transporte regulado" class="rounded-full border border-amber-500/25 bg-amber-500/10 px-2 py-1 text-[9px] font-bold text-amber-400">LITIO</span>' : ''}
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">${product.specs.map(spec => `<div class="spec-chip rounded-xl px-3 py-2 text-[11px] leading-snug text-neutral-200">${spec}</div>`).join('')}</div>
+                            <p class="text-[11px] text-neutral-500">${product.pack}</p>
+                            <div class="flex items-center justify-between gap-3 pt-2 border-t border-neutral-800">
+                                ${product.pdf
+                                    ? `<a href="${product.pdf}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-400 hover:text-white"><i data-lucide="file-text" class="w-3.5 h-3.5"></i>PDF original</a>`
+                                    : '<span class="text-[10px] font-medium text-neutral-600">Especificaciones del fabricante</span>'}
+                                <div class="flex items-center rounded-xl border border-neutral-700 bg-black overflow-hidden">
+                                    <button type="button" data-action="minus" data-id="${product.id}" class="w-10 h-10 text-lg text-neutral-400 hover:bg-neutral-800 hover:text-white" aria-label="Quitar ${product.model}">−</button>
+                                    <span class="min-w-14 text-center"><strong class="block text-sm leading-none">${quantity}</strong><small class="text-[8px] text-neutral-500">unidades</small></span>
+                                    <button type="button" data-action="plus" data-id="${product.id}" class="w-10 h-10 text-lg text-black bg-amber-500 hover:bg-amber-400" aria-label="Añadir ${product.model}">+</button>
+                                </div>
+                            </div>
+                        </article>`;
+                }).join('') || '<div class="md:col-span-2 rounded-3xl border border-neutral-800 bg-[#111112] p-12 text-center"><p class="font-bold">No encontramos productos</p><p class="text-sm text-neutral-500 mt-2">Prueba otra marca, categoría o búsqueda.</p></div>';
+
+                grid.querySelectorAll('[data-action]').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const product = CATALOG.find(item => item.id === button.dataset.id);
+                        changeQuantity(button.dataset.id, button.dataset.action === 'plus' ? product.step : -product.step);
+                    });
+                });
+            }
+
+            function cartEntries() {
+                return CATALOG
+                    .filter(product => (state.cart[product.id] || 0) > 0)
+                    .map(product => ({product, quantity: state.cart[product.id]}));
+            }
+
+            function capacity() {
+                return cartEntries().reduce((sum, entry) => sum + entry.product.fill * entry.quantity, 0);
+            }
+
+            function saveCart() {
+                localStorage.setItem('wexmor-container-v1', JSON.stringify(state.cart));
+            }
+
+            function changeQuantity(id, delta, exactValue) {
+                const product = CATALOG.find(item => item.id === id);
+                if (!product) return;
+                const current = state.cart[id] || 0;
+                const next = exactValue !== undefined ? exactValue : Math.max(0, current + delta);
+                if (next > 9999) return;
+                if (next === 0) delete state.cart[id];
+                else state.cart[id] = next;
+                saveCart();
+                renderProducts();
+                renderCart();
+                cartPanel.classList.remove('cart-pulse');
+                void cartPanel.offsetWidth;
+                cartPanel.classList.add('cart-pulse');
+            }
+
+            function renderCart() {
+                const entries = cartEntries();
+                const used = capacity();
+                const display = Math.min(used, 100);
+                $('capacity-percent').textContent = `${Math.round(used)} %`;
+                $('capacity-fill').style.width = `${display}%`;
+                $('capacity-fill').classList.toggle('bg-red-500', used > 100);
+                emptyCart.classList.toggle('hidden', entries.length > 0);
+                cartItems.classList.toggle('hidden', entries.length === 0);
+                $('send-proposal').disabled = entries.length === 0;
+                $('copy-proposal').disabled = entries.length === 0;
+
+                const status = $('capacity-status');
+                if (!entries.length) {
+                    status.textContent = 'Vacío';
+                    status.className = 'rounded-full border border-neutral-700 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-neutral-400';
+                } else if (used < 85) {
+                    status.textContent = 'Disponible';
+                    status.className = 'rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-400';
+                } else if (used <= 100) {
+                    status.textContent = 'Casi completo';
+                    status.className = 'rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-400';
+                } else {
+                    status.textContent = 'Revisar carga';
+                    status.className = 'rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-red-400';
+                }
+
+                cartItems.innerHTML = entries.map(({product, quantity}) => `
+                    <div class="p-4 flex items-center gap-3">
+                        <div class="min-w-0 flex-1">
+                            <span class="text-[9px] font-bold uppercase tracking-wider text-amber-500">${product.brand}</span>
+                            <p class="text-sm font-bold truncate">${product.model}</p>
+                            <p class="text-[10px] text-neutral-500">${quantity} uds. · ${(quantity / product.step).toLocaleString('es-ES', {maximumFractionDigits:1})} pallets ref.</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button type="button" data-cart-minus="${product.id}" class="w-8 h-8 rounded-lg border border-neutral-700 text-neutral-400 hover:text-white">−</button>
+                            <input data-cart-input="${product.id}" type="number" min="0" max="9999" value="${quantity}" class="w-16 rounded-lg border border-neutral-700 bg-black px-2 py-2 text-center text-sm font-bold outline-none focus:border-amber-500">
+                            <button type="button" data-cart-plus="${product.id}" class="w-8 h-8 rounded-lg bg-amber-500 text-black hover:bg-amber-400">+</button>
+                        </div>
+                    </div>`).join('');
+
+                cartItems.querySelectorAll('[data-cart-minus]').forEach(button => button.addEventListener('click', () => {
+                    const product = CATALOG.find(item => item.id === button.dataset.cartMinus);
+                    changeQuantity(button.dataset.cartMinus, -product.step);
+                }));
+                cartItems.querySelectorAll('[data-cart-plus]').forEach(button => button.addEventListener('click', () => {
+                    const product = CATALOG.find(item => item.id === button.dataset.cartPlus);
+                    changeQuantity(button.dataset.cartPlus, product.step);
+                }));
+                cartItems.querySelectorAll('[data-cart-input]').forEach(input => input.addEventListener('change', () => changeQuantity(input.dataset.cartInput, 0, Math.max(0, parseInt(input.value) || 0))));
+            }
+
+            function renderFilters() {
+                document.querySelectorAll('.category-btn').forEach(button => {
+                    const active = button.dataset.category === state.category;
+                    button.className = `category-btn shrink-0 inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-bold transition ${active ? 'border-amber-500 bg-amber-500 text-black' : 'border-neutral-800 bg-black text-neutral-400 hover:border-neutral-600 hover:text-white'}`;
+                });
+            }
+
+            function renderAll() {
+                renderFilters();
+                renderProducts();
+                renderCart();
+                lucide.createIcons();
+            }
+
+            function applyTemplate(name) {
+                const templates = {
+                    panels: {'trina-vertex-720': 594},
+                    industrial: {'longi-x10-670': 216, 'deye-50k-hv': 12, 'eco-dpu': 8},
+                    retail: {'trina-vertexs-455': 180, 'deye-6k-lv': 32, 'eco-river2pro': 24, 'eco-delta2max': 12}
+                };
+                state.cart = {...templates[name]};
+                saveCart();
+                renderAll();
+            }
+
+            function requestCode() {
+                const existing = sessionStorage.getItem('wexmor-request-code');
+                if (existing) return existing;
+                const now = new Date();
+                const day = String(now.getDate()).padStart(2, '0');
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const suffix = Math.random().toString(36).slice(2, 6).toUpperCase();
+                const code = `WEX-${now.getFullYear().toString().slice(-2)}${month}${day}-${suffix}`;
+                sessionStorage.setItem('wexmor-request-code', code);
+                return code;
+            }
+
+            function proposalText() {
+                const entries = cartEntries();
+                const name = $('request-name').value.trim() || 'No indicado';
+                const destination = $('request-destination').value.trim() || 'No indicado';
+                const notes = $('request-notes').value.trim() || 'Sin observaciones';
+                const regulated = entries.some(entry => entry.product.regulated);
+                const lines = entries.map(({product, quantity}) => `• ${product.brand} ${product.model}: ${quantity} uds. (${(quantity / product.step).toLocaleString('es-ES', {maximumFractionDigits:1})} pallets de referencia)`);
+                return [
+                    `SOLICITUD DE COTIZACIÓN ${requestCode()}`,
+                    '',
+                    `Cliente/empresa: ${name}`,
+                    `Destino: ${destination}`,
+                    'Formato: Contenedor 40’ HC',
+                    `Ocupación preliminar: ${Math.round(capacity())} %`,
+                    '',
+                    'PRODUCTOS SELECCIONADOS',
+                    ...lines,
+                    '',
+                    `Mercancía con litio: ${regulated ? 'Sí — requiere validación' : 'No identificada'}`,
+                    `Observaciones: ${notes}`,
+                    '',
+                    'Solicito validar disponibilidad, compatibilidad, embalaje, capacidad real, origen y precio en USDT.'
+                ].join('\n');
+            }
+
+            searchInput.addEventListener('input', () => {
+                state.search = searchInput.value;
+                renderProducts();
+                lucide.createIcons();
+            });
+            brandFilter.addEventListener('change', () => {
+                state.brand = brandFilter.value;
+                renderProducts();
+                lucide.createIcons();
+            });
+            $('clear-filters').addEventListener('click', () => {
+                state.category = 'all';
+                state.brand = 'all';
+                state.search = '';
+                searchInput.value = '';
+                brandFilter.value = 'all';
+                renderAll();
+            });
+            $('reset-container').addEventListener('click', () => {
+                if (!cartEntries().length || window.confirm('¿Vaciar todos los productos del contenedor?')) {
+                    state.cart = {};
+                    saveCart();
+                    renderAll();
+                }
+            });
+            document.querySelectorAll('.template-btn').forEach(button => button.addEventListener('click', () => applyTemplate(button.dataset.template)));
+            $('send-proposal').addEventListener('click', () => {
+                if (!cartEntries().length) return;
+                window.open(`https://wa.me/15613122929?text=${encodeURIComponent(proposalText())}`, '_blank', 'noopener,noreferrer');
+            });
+            $('copy-proposal').addEventListener('click', async () => {
+                if (!cartEntries().length) return;
+                const text = proposalText();
+                try {
+                    await navigator.clipboard.writeText(text);
+                } catch {
+                    const helper = document.createElement('textarea');
+                    helper.value = text;
+                    helper.style.position = 'fixed';
+                    helper.style.opacity = '0';
+                    document.body.appendChild(helper);
+                    helper.select();
+                    document.execCommand('copy');
+                    helper.remove();
+                }
+                const button = $('copy-proposal');
+                const original = button.innerHTML;
+                button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Resumen copiado';
+                lucide.createIcons();
+                setTimeout(() => {
+                    button.innerHTML = original;
+                    lucide.createIcons();
+                }, 1800);
+            });
+
+            renderAll();
         })();
     </script>
 </body>
