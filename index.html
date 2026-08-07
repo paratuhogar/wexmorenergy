@@ -165,6 +165,15 @@
         .cart-pulse {
             animation: cartPulse 0.35s ease;
         }
+        .brand-support-text {
+            color: #7dd3fc;
+        }
+        .whatsapp-float {
+            box-shadow: 0 14px 38px rgba(34, 197, 94, 0.28);
+        }
+        .whatsapp-float:hover {
+            box-shadow: 0 18px 48px rgba(34, 197, 94, 0.4);
+        }
         @keyframes cartPulse {
             50% { transform: scale(1.025); }
         }
@@ -185,12 +194,16 @@
     <header class="sticky top-0 z-50 w-full bg-black/80 backdrop-blur-md border-b border-neutral-900 px-6 py-4">
         <div class="container mx-auto max-w-6xl flex items-center justify-between">
             <div class="flex items-center">
-                <img src="logo.png" alt="Wexmor Energy" class="h-7 w-auto object-contain logo-white-text">
+                <img src="logo.png" alt="Wexmor Energy" class="h-10 md:h-12 w-auto object-contain logo-white-text">
             </div>
-            <div>
+            <div class="flex items-center gap-3">
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-neutral-900 text-neutral-400 border border-neutral-800">
                     Centroamérica &amp; Caribe
                 </span>
+                <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-amber-500 px-4 py-2 text-xs font-bold text-black transition-colors hover:bg-amber-400">
+                    <i data-lucide="phone" class="h-3.5 w-3.5"></i>
+                    Contacto
+                </a>
             </div>
         </div>
     </header>
@@ -246,7 +259,7 @@
 
                     <!-- Logotipo en Formato Elegante -->
                     <div class="py-1">
-                        <img src="logo.png" alt="Wexmor Energy" class="h-16 md:h-22 w-auto object-contain logo-white-text">
+                        <img src="logo.png" alt="Wexmor Energy" class="h-24 md:h-32 w-auto object-contain logo-white-text">
                     </div>
                     
                     <!-- Titulares y Propuesta de Valor -->
@@ -256,7 +269,7 @@
                             <span class="text-amber-500">Soluciones reales.</span>
                         </h2>
                         <div class="space-y-1">
-                            <p class="text-base md:text-lg font-bold tracking-tight text-neutral-200">
+                            <p class="text-base md:text-lg font-bold tracking-tight brand-support-text">
                                 Distribuidor especializado en fotovoltaica.
                             </p>
                             <p class="text-sm md:text-base font-bold text-amber-500 tracking-wider uppercase">
@@ -266,7 +279,7 @@
                     </div>
 
                     <!-- Párrafo descriptivo -->
-                    <p class="text-neutral-400 text-xs md:text-sm leading-relaxed font-normal">
+                    <p class="text-sky-200/70 text-xs md:text-sm leading-relaxed font-normal">
                         Suministro mayorista de componentes fotovoltaicos, inversores y materiales eléctricos para instaladores y empresas de la región.
                     </p>
 
@@ -768,22 +781,55 @@
     </main>
 
     <!-- Footer Corporativo Minimalista -->
-    <footer class="border-t border-neutral-900 bg-black py-16">
-        <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row items-center justify-between gap-8">
-            <!-- Footer Logo transparente con filtro de contraste -->
-            <div class="flex items-center">
-                <img src="logo.png" alt="Wexmor Energy" class="h-7 w-auto object-contain logo-white-text">
+    <footer id="contacto" class="border-t border-neutral-900 bg-black py-14 md:py-16">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
+                <div class="space-y-4">
+                    <img src="logo.png" alt="Wexmor Energy" class="h-14 md:h-16 w-auto object-contain logo-white-text">
+                    <p class="brand-support-text text-sm font-semibold leading-relaxed">
+                        Energía solar para Centroamérica y el Caribe.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-[0.18em] text-amber-500">Contacto</h2>
+                    <div class="space-y-3 text-sm">
+                        <a href="mailto:sales@wexmorenergy.com" class="flex items-center gap-3 text-neutral-200 transition-colors hover:text-sky-300">
+                            <i data-lucide="mail" class="h-4 w-4 text-sky-300"></i>
+                            sales@wexmorenergy.com
+                        </a>
+                        <a href="https://wa.me/15613122929" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-neutral-200 transition-colors hover:text-sky-300">
+                            <i data-lucide="message-circle" class="h-4 w-4 text-sky-300"></i>
+                            +1 561 312 2929
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h2 class="text-xs font-bold uppercase tracking-[0.18em] text-amber-500">Dirección</h2>
+                    <address class="not-italic text-sm leading-6 text-neutral-300">
+                        <strong class="text-white">Wexmorenergy Corp.</strong><br>
+                        Torre de las Américas, Torre A, piso 12<br>
+                        Panama City, Panamá
+                    </address>
+                </div>
             </div>
-            <p class="text-neutral-600 text-sm">
-                &copy; 2026 Wexmor Energy. Todos los derechos reservados.
-            </p>
-            <div class="flex items-center gap-6 text-xs text-neutral-500">
-                <a href="mailto:sales@wexmorenergy.com" class="hover:text-white transition-colors">sales@wexmorenergy.com</a>
-                <span class="text-neutral-800">&bull;</span>
-                <span>Distribución Fotovoltaica</span>
+            <div class="mt-12 flex flex-col gap-3 border-t border-neutral-900 pt-6 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
+                <p>&copy; 2026 Wexmor Energy. Todos los derechos reservados.</p>
+                <p class="text-sky-300/70">Distribución fotovoltaica</p>
             </div>
         </div>
     </footer>
+
+    <a href="https://wa.me/15613122929?text=Hola%2C%20quisiera%20informaci%C3%B3n%20sobre%20sus%20soluciones%20fotovoltaicas."
+       target="_blank"
+       rel="noopener noreferrer"
+       class="whatsapp-float fixed bottom-5 right-5 z-[60] inline-flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white transition-all duration-200 hover:-translate-y-1 hover:bg-green-400 focus:outline-none focus:ring-4 focus:ring-green-500/30 md:bottom-7 md:right-7 md:h-16 md:w-16"
+       aria-label="Contactar a Wexmor Energy por WhatsApp"
+       title="Contactar por WhatsApp">
+        <i data-lucide="message-circle" class="h-7 w-7 md:h-8 md:w-8" aria-hidden="true"></i>
+        <span class="sr-only">Contactar por WhatsApp</span>
+    </a>
 
     <!-- Scripts de Interacción -->
     <script>
