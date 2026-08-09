@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wexmor Energy - Distribuidor Fotovoltaico</title>
+    <title>Wexmor Energy - Contenedores de Equipamiento Solar</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -174,6 +174,36 @@
         .whatsapp-float:hover {
             box-shadow: 0 18px 48px rgba(34, 197, 94, 0.4);
         }
+        .conversion-hero {
+            background:
+                linear-gradient(90deg, rgba(0,0,0,.97) 0%, rgba(0,0,0,.88) 44%, rgba(0,0,0,.24) 100%),
+                url('hero.png') center right / cover no-repeat;
+        }
+        .conversion-card {
+            background: linear-gradient(145deg, rgba(24,24,27,.96), rgba(9,9,11,.98));
+            box-shadow: 0 28px 80px rgba(0,0,0,.38);
+        }
+        .conversion-input {
+            width: 100%;
+            border: 1px solid #3f3f46;
+            background: #0a0a0a;
+            color: #fff;
+            border-radius: 12px;
+            padding: 11px 13px;
+            font-size: 13px;
+            outline: none;
+        }
+        .conversion-input:focus {
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245,158,11,.12);
+        }
+        @media (max-width: 768px) {
+            .conversion-hero {
+                background:
+                    linear-gradient(180deg, rgba(0,0,0,.94) 0%, rgba(0,0,0,.82) 100%),
+                    url('hero.png') 72% center / cover no-repeat;
+            }
+        }
         @keyframes cartPulse {
             50% { transform: scale(1.025); }
         }
@@ -181,13 +211,13 @@
 </head>
 <body class="text-white min-h-screen overflow-x-hidden selection:bg-neutral-800 selection:text-white">
 
-    <!-- BANNER SUPERIOR DE ALTA VISIBILIDAD (Aviso de Construcción) -->
+    <!-- Barra de propuesta comercial -->
     <div class="bg-neutral-950 text-amber-500 text-xs md:text-sm py-3.5 px-6 text-center border-b-2 border-amber-500 font-bold tracking-wider flex items-center justify-center gap-2.5 shadow-lg relative z-50">
         <span class="relative flex h-2.5 w-2.5">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
         </span>
-        SITIO WEB OFICIAL EN CONSTRUCCIÓN — PRÓXIMO LANZAMIENTO PARA CENTROAMÉRICA Y EL CARIBE
+        DISTRIBUCIÓN B2B DESDE PANAMÁ — CONTENEDORES COMPLETOS Y CARGA CONSOLIDADA
     </div>
 
     <!-- Header minimalista estilo Apple -->
@@ -200,7 +230,7 @@
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-neutral-900 text-neutral-400 border border-neutral-800">
                     Centroamérica &amp; Caribe
                 </span>
-                <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-amber-500 px-4 py-2 text-xs font-bold text-black transition-colors hover:bg-amber-400">
+                <a href="#cotizador" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-amber-500 px-4 py-2 text-xs font-bold text-black transition-colors hover:bg-amber-400">
                     <i data-lucide="phone" class="h-3.5 w-3.5"></i>
                     Contacto
                 </a>
@@ -210,6 +240,115 @@
 
     <!-- Contenedor Principal con amplios márgenes -->
     <main class="container mx-auto px-6 py-8 md:py-12 space-y-24 relative z-10 max-w-6xl">
+
+        <!-- Hero orientado a conversión -->
+        <section class="conversion-hero overflow-hidden rounded-3xl border border-neutral-800 min-h-[720px] lg:min-h-[650px] flex items-center" aria-labelledby="conversion-title">
+            <div class="grid w-full grid-cols-1 gap-10 px-7 py-10 md:px-12 md:py-14 lg:grid-cols-12 lg:items-center">
+                <div class="space-y-7 lg:col-span-7">
+                    <div class="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[.16em] text-amber-400">
+                        <i data-lucide="container" class="h-4 w-4"></i>
+                        Suministro mayorista internacional
+                    </div>
+                    <div class="space-y-5">
+                        <h1 id="conversion-title" class="max-w-3xl text-4xl font-black leading-[1.02] tracking-tight text-white md:text-6xl">
+                            Contenedores completos de <span class="text-amber-500">equipamiento solar.</span>
+                        </h1>
+                        <p class="max-w-2xl text-lg leading-relaxed text-neutral-200 md:text-xl">
+                            Paneles, inversores y baterías para distribuidores, instaladores y empresas de Centroamérica y el Caribe.
+                        </p>
+                    </div>
+                    <div class="grid gap-3 text-sm text-neutral-200 sm:grid-cols-2">
+                        <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-amber-500"></i>Marcas líderes y fichas técnicas</div>
+                        <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-amber-500"></i>Propuestas por pallet o contenedor</div>
+                        <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-amber-500"></i>Logística internacional coordinada</div>
+                        <div class="flex items-center gap-3"><i data-lucide="check-circle-2" class="h-5 w-5 text-amber-500"></i>Atención comercial especializada</div>
+                    </div>
+                    <div class="flex flex-col gap-3 sm:flex-row">
+                        <a href="#cotizador" class="inline-flex items-center justify-center gap-2 rounded-2xl bg-amber-500 px-6 py-4 text-sm font-black text-black transition hover:-translate-y-0.5 hover:bg-amber-400">
+                            Configurar mi contenedor
+                            <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                        </a>
+                        <a href="https://wa.me/15613122929?text=Hola%2C%20quiero%20cotizar%20un%20contenedor%20de%20equipamiento%20solar." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-black/40 px-6 py-4 text-sm font-bold text-white transition hover:border-green-400/70 hover:bg-black/60">
+                            <i data-lucide="message-circle" class="h-5 w-5 text-green-400"></i>
+                            Hablar por WhatsApp
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap gap-x-7 gap-y-2 border-t border-white/10 pt-5 text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                        <span>Panamá</span><span>China</span><span>Europa</span><span>Estados Unidos</span>
+                    </div>
+                </div>
+
+                <div id="cotizador" class="conversion-card rounded-3xl border border-neutral-700 p-6 lg:col-span-5 md:p-7">
+                    <div class="mb-6 space-y-2">
+                        <p class="text-xs font-bold uppercase tracking-[.16em] text-amber-500">Cotización inicial</p>
+                        <h2 class="text-2xl font-black text-white">¿Qué necesitas importar?</h2>
+                        <p class="text-sm leading-relaxed text-neutral-400">Completa estos datos y abriremos una solicitud preparada en WhatsApp.</p>
+                    </div>
+                    <form id="container-lead-form" class="space-y-4">
+                        <div>
+                            <label for="lead-country" class="mb-1.5 block text-xs font-bold text-neutral-300">País de destino</label>
+                            <input id="lead-country" name="country" class="conversion-input" placeholder="Ej. Guatemala" required>
+                        </div>
+                        <div>
+                            <label for="lead-company" class="mb-1.5 block text-xs font-bold text-neutral-300">Empresa</label>
+                            <input id="lead-company" name="company" class="conversion-input" placeholder="Nombre de la empresa" required>
+                        </div>
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <div>
+                                <label for="lead-type" class="mb-1.5 block text-xs font-bold text-neutral-300">Tipo de comprador</label>
+                                <select id="lead-type" name="buyer" class="conversion-input" required>
+                                    <option value="">Seleccionar</option>
+                                    <option>Distribuidor</option>
+                                    <option>Instalador</option>
+                                    <option>Empresa / Proyecto</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="lead-load" class="mb-1.5 block text-xs font-bold text-neutral-300">Tipo de carga</label>
+                                <select id="lead-load" name="load" class="conversion-input" required>
+                                    <option>Contenedor completo</option>
+                                    <option>Carga consolidada</option>
+                                    <option>Necesito asesoría</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="lead-products" class="mb-1.5 block text-xs font-bold text-neutral-300">Equipos de interés</label>
+                            <select id="lead-products" name="products" class="conversion-input" required>
+                                <option>Paneles solares</option>
+                                <option>Inversores</option>
+                                <option>Baterías LiFePO₄</option>
+                                <option>Contenedor mixto</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-2xl bg-green-500 px-5 py-4 text-sm font-black text-white transition hover:bg-green-400">
+                            <i data-lucide="message-circle" class="h-5 w-5"></i>
+                            Solicitar cotización por WhatsApp
+                        </button>
+                        <p class="text-center text-[11px] text-neutral-500">Respuesta comercial personalizada. Sin compromiso.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Señales rápidas de confianza -->
+        <section class="grid gap-5 md:grid-cols-3" aria-label="Ventajas comerciales">
+            <div class="rounded-3xl border border-neutral-800 bg-neutral-950 p-7">
+                <i data-lucide="building-2" class="mb-5 h-8 w-8 text-amber-500"></i>
+                <h2 class="mb-2 text-lg font-bold">Operación B2B desde Panamá</h2>
+                <p class="text-sm leading-relaxed text-neutral-400">Atención regional para distribuidores, instaladores y proyectos comerciales.</p>
+            </div>
+            <div class="rounded-3xl border border-neutral-800 bg-neutral-950 p-7">
+                <i data-lucide="boxes" class="mb-5 h-8 w-8 text-amber-500"></i>
+                <h2 class="mb-2 text-lg font-bold">Configuración flexible</h2>
+                <p class="text-sm leading-relaxed text-neutral-400">Contenedores de una categoría o combinaciones de paneles, inversores y baterías.</p>
+            </div>
+            <div class="rounded-3xl border border-neutral-800 bg-neutral-950 p-7">
+                <i data-lucide="headphones" class="mb-5 h-8 w-8 text-amber-500"></i>
+                <h2 class="mb-2 text-lg font-bold">Asesoría antes de comprar</h2>
+                <p class="text-sm leading-relaxed text-neutral-400">Validación de modelos, cantidades, documentación técnica y planificación logística.</p>
+            </div>
+        </section>
 
         <!-- Marcas representadas: máxima visibilidad al inicio -->
         <section class="space-y-10 pt-4" aria-labelledby="brands-title">
@@ -241,7 +380,7 @@
         </section>
 
         <!-- SECCIÓN HERO: DISEÑO CON ESPACIOS PERFECTAMENTE EQUILIBRADOS -->
-        <section class="w-full relative overflow-hidden rounded-3xl border border-neutral-900 shadow-2xl responsive-hero min-h-[85vh] flex items-center">
+        <section class="hidden w-full relative overflow-hidden rounded-3xl border border-neutral-900 shadow-2xl responsive-hero min-h-[85vh] items-center">
             
             <div class="container mx-auto px-8 py-12 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full h-full">
                 
@@ -744,6 +883,21 @@
                         </button>
                     </div>
                 </aside>
+            </div>
+        </section>
+
+        <!-- Proceso de compra -->
+        <section class="space-y-10" aria-labelledby="process-title">
+            <div class="mx-auto max-w-2xl space-y-3 text-center">
+                <p class="text-xs font-bold uppercase tracking-[.18em] text-amber-500">Proceso comercial</p>
+                <h2 id="process-title" class="text-3xl font-black tracking-tight md:text-5xl">Del requerimiento al embarque.</h2>
+                <p class="text-neutral-400">Un proceso claro para compras mayoristas internacionales.</p>
+            </div>
+            <div class="grid gap-5 md:grid-cols-4">
+                <div class="rounded-3xl border border-neutral-800 p-6"><span class="text-4xl font-black text-amber-500/40">01</span><h3 class="mt-5 font-bold">Solicitud</h3><p class="mt-2 text-sm leading-relaxed text-neutral-500">Indicas destino, productos y volumen requerido.</p></div>
+                <div class="rounded-3xl border border-neutral-800 p-6"><span class="text-4xl font-black text-amber-500/40">02</span><h3 class="mt-5 font-bold">Propuesta</h3><p class="mt-2 text-sm leading-relaxed text-neutral-500">Validamos modelos, disponibilidad y configuración.</p></div>
+                <div class="rounded-3xl border border-neutral-800 p-6"><span class="text-4xl font-black text-amber-500/40">03</span><h3 class="mt-5 font-bold">Coordinación</h3><p class="mt-2 text-sm leading-relaxed text-neutral-500">Confirmamos documentación, pago y preparación.</p></div>
+                <div class="rounded-3xl border border-neutral-800 p-6"><span class="text-4xl font-black text-amber-500/40">04</span><h3 class="mt-5 font-bold">Embarque</h3><p class="mt-2 text-sm leading-relaxed text-neutral-500">Coordinamos la salida hacia el puerto acordado.</p></div>
             </div>
         </section>
 
@@ -1258,6 +1412,28 @@
             });
 
             renderAll();
+        })();
+    </script>
+    <script>
+        (() => {
+            const leadForm = document.getElementById('container-lead-form');
+            if (!leadForm) return;
+            leadForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const data = new FormData(leadForm);
+                const message = [
+                    'Hola, quiero solicitar una cotización mayorista.',
+                    '',
+                    `Empresa: ${data.get('company')}`,
+                    `País de destino: ${data.get('country')}`,
+                    `Tipo de comprador: ${data.get('buyer')}`,
+                    `Tipo de carga: ${data.get('load')}`,
+                    `Equipos de interés: ${data.get('products')}`,
+                    '',
+                    'Quedo atento a su propuesta comercial.'
+                ].join('\n');
+                window.open(`https://wa.me/15613122929?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+            });
         })();
     </script>
 </body>
