@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#000000">
+    <title>Solicitud preparada | Wexmor Energy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-black text-white antialiased">
+    <main class="mx-auto flex min-h-screen max-w-3xl items-center px-6 py-16">
+        <section class="w-full rounded-3xl border border-neutral-800 bg-neutral-950 p-8 text-center shadow-2xl md:p-14" aria-labelledby="confirmation-title">
+            <img src="logo.png" alt="Wexmor Energy" width="637" height="392" class="mx-auto mb-8 h-24 w-auto object-contain" style="filter: invert(1) hue-rotate(180deg);">
+            <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-green-500/30 bg-green-500/10 text-3xl text-green-400" aria-hidden="true">✓</div>
+            <p class="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-amber-500">Siguiente paso</p>
+            <h1 id="confirmation-title" class="text-3xl font-black tracking-tight md:text-5xl">Tu solicitud está preparada.</h1>
+            <p id="confirmation-message" class="mx-auto mt-5 max-w-xl text-base leading-relaxed text-neutral-300">Confirma el envío en WhatsApp o en tu aplicación de correo. Nuestro equipo comercial revisará los datos para preparar una propuesta.</p>
+            <div class="mx-auto mt-7 max-w-xl rounded-2xl border border-amber-500/20 bg-amber-500/10 p-4 text-left text-sm leading-relaxed text-amber-100">
+                Recuerda: cada contenedor contiene un solo producto y referencia porque se carga directamente en la fábrica de origen.
+            </div>
+            <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+                <a href="index.html#configurador" class="rounded-2xl bg-amber-500 px-6 py-4 text-sm font-black text-black transition hover:bg-amber-400">Revisar productos</a>
+                <a href="https://wa.me/15613122929?text=Hola%2C%20acabo%20de%20preparar%20una%20solicitud%20de%20cotizaci%C3%B3n." target="_blank" rel="noopener noreferrer" class="rounded-2xl border border-green-500/40 bg-green-500/10 px-6 py-4 text-sm font-bold text-green-400 transition hover:bg-green-500 hover:text-white">Abrir WhatsApp</a>
+            </div>
+            <p class="mt-7 text-xs text-neutral-500">También puedes escribir directamente a <a class="text-sky-300 hover:underline" href="mailto:sales@wexmorenergy.com">sales@wexmorenergy.com</a>.</p>
+        </section>
+    </main>
+    <script>
+        (() => {
+            const params = new URLSearchParams(window.location.search);
+            const channel = params.get('canal');
+            const message = document.getElementById('confirmation-message');
+            if (channel === 'email') {
+                message.textContent = 'Confirma el envío en tu aplicación de correo. Nuestro equipo comercial revisará los datos para preparar una propuesta.';
+            } else if (channel === 'whatsapp') {
+                message.textContent = 'Confirma el envío en la ventana de WhatsApp que acabamos de abrir. Nuestro equipo comercial revisará los datos para preparar una propuesta.';
+            }
+        })();
+    </script>
+</body>
+</html>
